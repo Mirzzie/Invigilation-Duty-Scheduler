@@ -129,7 +129,7 @@ $uname = $_SESSION['uname'];
   </head>
   <body>
 
-<main class="d-flex flex-nowrap">
+<main class="d-flex flex-nowrap" style="height: 990px;">
   <h1 class="visually-hidden">ADD DEPARTMENT</h1>
 
   <div class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark" style="width: 280px;">
