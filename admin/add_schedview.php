@@ -233,10 +233,15 @@ if(isset($_REQUEST['view'])){
       echo "<th>Action</th>";
       echo "</tr></thead>";
         $exam_id = $_POST['exam_id'];
-
         $fetch_table="SELECT * FROM exam_tb,x_table_tb, dep_tb,sub_tb WHERE dep_tb.depid= sub_tb.depid AND sub_tb.sub_id= x_table_tb.sub_id AND exam_tb.exam_id=$exam_id AND x_table_tb.exam_id=$exam_id";
         // echo $fetch_table;
         $result = mysqli_query($conn, $fetch_table);
+        if($result->num_rows == 0){
+          echo "<tbody><tr>";
+          echo "<td colspan='5'>No Timetable Found</td>";
+          echo "</tr></tbody>";
+        }
+        else{
         while($row=$result->fetch_assoc()){
           $table_id = $row['table_id'];
           echo "<tbody><tr>";
@@ -247,6 +252,7 @@ if(isset($_REQUEST['view'])){
           echo "<td><a class='btn btn-outline-primary' href='allocate.php?table_id=$table_id'>allocate</a></td>";
           echo "</tr></tbody>";
         }
+      }
  echo "</table></div>";
   }
 ?>
