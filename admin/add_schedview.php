@@ -221,36 +221,60 @@ $uname = $_SESSION['uname'];
     </div>
     </div>
 
-
-<?php
+    <?php
 include '../server.php';
-if(isset($_REQUEST['view'])){
-  echo "<div class='card'>";
-      echo "<table id='data_table' class='table table-bordered border-dark'>";
-		echo "<thead><tr>";
-			echo	"<th>Date</th>";
-      echo "<th>Time</th>";
-			echo	"<th>Course</th>";
-      echo "<th>Subject</th>";
-      echo "</tr></thead>";
-        $exam_id = $_POST['exam_id'];
 
-        $fetch_table="SELECT * FROM exam_tb,x_table_tb, dep_tb,sub_tb WHERE dep_tb.depid= sub_tb.depid AND sub_tb.sub_id= x_table_tb.sub_id AND exam_tb.exam_id=$exam_id AND x_table_tb.exam_id=$exam_id";
-        // echo $fetch_table;
-        $result = mysqli_query($conn, $fetch_table);
-        while($row=$result->fetch_assoc()){
-          $table_id = $row['table_id'];
-          echo "<tbody><tr>";
-          echo "<td>".$row['x_date']."</td>";
-          echo "<td>".$row['time']."</td>";
-          echo "<td>".$row['dname']."</td>";
-          echo "<td>".$row['sub_name']."</td>";
-          echo "<td><a class='btn-btn-primary' href='allocate.php?table_id=$table_id'>Allocate</a></td>";
-          echo "</tr></tbody>";
-        }
- echo "</table></div>";
+// Check if the 'view' request parameter has been set
+if (isset($_REQUEST['view'])) {
+  // Create a connection to the database
+
+  // Prepare the SELECT statement
+  $stmt = mysqli_prepare("SELECT exam_tb.x_date, exam_tb.time, dep_tb.dname, sub_tb.sub_name, x_table_tb.table_id
+  FROM exam_tb
+  INNER JOIN x_table_tb ON exam_tb.exam_id = x_table_tb.exam_id
+  INNER JOIN sub_tb ON x_table_tb.sub_id = sub_tb.sub_id
+  INNER JOIN dep_tb ON sub_tb.depid = dep_tb.depid
+  WHERE exam_tb.exam_id = ?");
+
+  // Bind the exam_id parameter to the statement
+  mysqli_stmt_bind_param($stmt, "i", $_POST['exam_id']);
+
+  // Execute the statement
+  mysqli_stmt_execute($stmt);
+
+  // Get the result set
+  $result = mysqli_stmt_get_result($stmt);
+
+  // Start building the HTML table
+  echo "<div class='card'>";
+  echo "<table id='data_table' class='table table-bordered border-dark'>";
+  echo "<thead><tr>";
+  echo "<th>Date</th>";
+  echo "<th>Time</th>";
+  echo "<th>Course</th>";
+  echo "<th>Subject</th>";
+  echo "</tr></thead>";
+  echo "<tbody>";
+
+  // Iterate over the rows in the result set
+  while ($row = mysqli_fetch_assoc($result)) {
+    // Generate a table row for each row in the result set
+    echo "<tr>";
+    echo "<td>" . $row['x_date'] . "</td>";
+    echo "<td>" . $row['time'] . "</td>";
+    echo "<td>" . $row['dname'] . "</td>";
+    echo "<td>" . $row['sub_name'] . "</td>";
+    echo "<td><a class='btn-btn-primary' href='allocate.php?table_id=" . $row['table_id'] . "'>Allocate</a></td>";
+    echo "</tr>";
   }
+
+  // Close the table and container elements
+  echo "</tbody></table></div>";
+
+  // Close the database connection
+}
 ?>
+
 
 <script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha384-GNFwBvfVxBkLMJpYMOABq3c+d3KnQxudP/mGPkzpZSTYykLBNsZEnG2D9G/X/+7D" crossorigin="anonymous" async></script>
 
