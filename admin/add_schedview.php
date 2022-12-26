@@ -222,9 +222,10 @@ $uname = $_SESSION['uname'];
 <?php
 include '../server.php';
 if(isset($_REQUEST['view'])){
-  echo "<div class='card'>";
+      echo "<div class='card'>";
+      echo"<h5 class='card-header'>EXAM TIMETABLE</h5>";
       echo "<table id='data_table' class='table table-bordered border-dark'>";
-		echo "<thead><tr>";
+		  echo "<thead><tr>";
 			echo	"<th>Date</th>";
       echo "<th>Time</th>";
 			echo	"<th>Course</th>";
