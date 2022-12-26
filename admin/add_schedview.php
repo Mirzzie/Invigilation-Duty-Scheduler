@@ -155,7 +155,7 @@ $uname = $_SESSION['uname'];
         </a>
       </li>
       <li>
-        <a href="add_sched.php" class="nav-link active" aria-current="page">
+        <a href="add_schedview.php" class="nav-link active" aria-current="page">
           <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#table"/></svg>
           Create Schedule
         </a>
@@ -218,20 +218,19 @@ $uname = $_SESSION['uname'];
     </tr>
     </table>
     </div>
-    </div>
-    </div>
-
-
+    
 <?php
 include '../server.php';
 if(isset($_REQUEST['view'])){
-  echo "<div class='card'>";
+      echo "<div class='card'>";
+      echo"<h5 class='card-header'>EXAM TIMETABLE</h5>";
       echo "<table id='data_table' class='table table-bordered border-dark'>";
-		echo "<thead><tr>";
+		  echo "<thead><tr>";
 			echo	"<th>Date</th>";
       echo "<th>Time</th>";
 			echo	"<th>Course</th>";
       echo "<th>Subject</th>";
+      echo "<th>Action</th>";
       echo "</tr></thead>";
         $exam_id = $_POST['exam_id'];
 
@@ -245,12 +244,14 @@ if(isset($_REQUEST['view'])){
           echo "<td>".$row['time']."</td>";
           echo "<td>".$row['dname']."</td>";
           echo "<td>".$row['sub_name']."</td>";
-          echo "<td><a class='btn-btn-primary' href='allocate.php?table_id=$table_id'>Allocate</a></td>";
+          echo "<td><a class='btn btn-outline-primary' href='allocate.php?table_id=$table_id'>allocate</a></td>";
           echo "</tr></tbody>";
         }
  echo "</table></div>";
   }
 ?>
+</div>
+
 
 <script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha384-GNFwBvfVxBkLMJpYMOABq3c+d3KnQxudP/mGPkzpZSTYykLBNsZEnG2D9G/X/+7D" crossorigin="anonymous" async></script>
 

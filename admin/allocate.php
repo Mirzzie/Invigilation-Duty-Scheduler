@@ -216,7 +216,7 @@ $uname = $_SESSION['uname'];
         </a>
       </li>
       <li>
-        <a href="add_sched.php" class="nav-link active" aria-current="page">                   
+        <a href="add_schedview.php" class="nav-link active" aria-current="page">                   
           <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#table"/></svg>
           Create Schedule
         </a>
@@ -293,11 +293,14 @@ $uname = $_SESSION['uname'];
               </select>
     </tr><br>
     <tr>
-  
-    <button type="submit" class="btn btn-primary mb-3" name="allocate">ALLOCATE</button>
-    </form>
-    </tr>
-    </table>
+    <div class="hstack gap-3">
+    <button type="submit" class="btn btn-outline-primary" name="allocate">allocate</button>
+  <div class="vr"></div>
+  <a class='btn btn-outline-secondary' href="add_schedview.php">Go back</a>
+</div>
+</form>
+</tr>
+</table>
 </div>
 <?php
 include '../server.php';
@@ -319,7 +322,7 @@ if(isset($_REQUEST['allocate'])){
             $result = mysqli_query($conn, $insert);
             if($result){
                     echo "<script>alert('Faculty Allocated Successfully')</script>";
-                    echo "<script>window.location.href='add_sched.php'</script>";
+                    echo "<script>window.location.href='add_schedview.php'</script>";
             }
             else{
                     echo "<script>alert('Faculty Allocation Failed')</script>";
@@ -332,12 +335,9 @@ if(isset($_REQUEST['allocate'])){
             // }
 // }
 ?>
-  <script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha384-GNFwBvfVxBkLMJpYMOABq3c+d3KnQxudP/mGPkzpZSTYykLBNsZEnG2D9G/X/+7D" crossorigin="anonymous" async></script>
+<script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha384-GNFwBvfVxBkLMJpYMOABq3c+d3KnQxudP/mGPkzpZSTYykLBNsZEnG2D9G/X/+7D" crossorigin="anonymous" async></script>
 </main>
-
-
-    <script src="../assets/js/bootstrap.bundle.min.js"></script>
-
-      <script src="../assets/js/sidebars.js"></script>
-  </body>
+<script src="../assets/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/js/sidebars.js"></script>
+</body>
 </html>
