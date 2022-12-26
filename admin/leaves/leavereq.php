@@ -206,7 +206,7 @@ $uname = $_SESSION['uname'];
 			$sql_query = "SELECT * FROM fac_tb,dep_tb,leave_type,leave_list WHERE leave_type.id=leave_list.leave_type_id AND fac_tb.depid= dep_tb.depid AND fac_tb.fid=leave_list.fid AND leave_list.status=0";
 			$resultset = mysqli_query($conn, $sql_query) or die("database error:". mysqli_error($conn));
       if(mysqli_num_rows($resultset) == 0) {
-        echo "<tr><td colspan='7' text-align='center'>No Record Found</td></tr>";
+        echo "<tr><td colspan='7'>No Record Found</td></tr>";
       }
       else{
 			while( $row = mysqli_fetch_assoc($resultset) ) {
