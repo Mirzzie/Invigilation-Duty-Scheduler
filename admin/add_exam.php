@@ -263,12 +263,14 @@ if($_POST){
         $e_date = $_POST['e_date'];
         $sem_id = $_POST['sem_id'];
         $sql = "SELECT * FROM exam_tb WHERE exam_name = '$ex_name'";
-        $result0 = mysqli_query($conn, $sql);
-          while($row=$result0->fetch_assoc()){
-          if($ex_name == $row['exam_name'] && $sem_id == $row['sem_id']){
-          echo "<script>alert('Examination Already Exists!');</script>";
+        $result = mysqli_query($conn, $sql);
+        if(mysqli_num_rows($result) > 0){
+          while($row = mysqli_fetch_assoc($result)){
+            if($row['exam_name'] == $ex_name && $row['sem_id'] == $sem_id){
+              echo "<script>alert('Examination Already Exists!');</script>";
+            }
+          }
         }
-      }
       else{
         $query = "INSERT INTO exam_tb (exam_name,start_date,end_date,sem_id,status) VALUES('$ex_name','$s_date','$e_date','$sem_id','1')";
                 $result = mysqli_query($conn, $query);
