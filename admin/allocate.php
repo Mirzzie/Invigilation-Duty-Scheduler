@@ -293,12 +293,14 @@ $uname = $_SESSION['uname'];
               </select>
     </tr><br>
     <tr>
-  
+    <div class="hstack gap-3">
     <button type="submit" class="btn btn-outline-primary" name="allocate">allocate</button>
-    </form>
-    </tr>
-    </table>
-    <a class='btn btn-outline-secondary' href='add_scheduleview.php'>Go back</a>
+  <div class="vr"></div>
+  <a class='btn btn-outline-primary' href='add_schedview.php'>Go back</a>
+</div>
+</form>
+</tr>
+</table>
 </div>
 <?php
 include '../server.php';
