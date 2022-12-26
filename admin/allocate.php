@@ -257,7 +257,7 @@ $uname = $_SESSION['uname'];
 
 <div class="card">      	
   <h5 class="card-header">
-    AllOCATION
+    ALLOCATION
   </h5>
   
   <form method="POST" action="" style= "padding: 30px; width: 880px;">
