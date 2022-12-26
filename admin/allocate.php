@@ -294,10 +294,11 @@ $uname = $_SESSION['uname'];
     </tr><br>
     <tr>
   
-    <button type="submit" class="btn btn-primary mb-3" name="allocate">ALLOCATE</button>
+    <button type="submit" class="btn btn-outline-primary" name="allocate">allocate</button>
     </form>
     </tr>
     </table>
+    <a class='btn btn-outline-secondary' href='add_scheduleview.php'>Go back</a>
 </div>
 <?php
 include '../server.php';
@@ -332,12 +333,9 @@ if(isset($_REQUEST['allocate'])){
             // }
 // }
 ?>
-  <script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha384-GNFwBvfVxBkLMJpYMOABq3c+d3KnQxudP/mGPkzpZSTYykLBNsZEnG2D9G/X/+7D" crossorigin="anonymous" async></script>
+<script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha384-GNFwBvfVxBkLMJpYMOABq3c+d3KnQxudP/mGPkzpZSTYykLBNsZEnG2D9G/X/+7D" crossorigin="anonymous" async></script>
 </main>
-
-
-    <script src="../assets/js/bootstrap.bundle.min.js"></script>
-
-      <script src="../assets/js/sidebars.js"></script>
-  </body>
+<script src="../assets/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/js/sidebars.js"></script>
+</body>
 </html>
