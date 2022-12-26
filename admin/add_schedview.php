@@ -229,7 +229,7 @@ if (isset($_REQUEST['view'])) {
   // Create a connection to the database
 
   // Prepare the SELECT statement
-  $stmt = mysqli_prepare("SELECT exam_tb.x_date, exam_tb.time, dep_tb.dname, sub_tb.sub_name, x_table_tb.table_id
+  $stmt = mysqli_prepare($conn,"SELECT exam_tb.x_date, exam_tb.time, dep_tb.dname, sub_tb.sub_name, x_table_tb.table_id
   FROM exam_tb
   INNER JOIN x_table_tb ON exam_tb.exam_id = x_table_tb.exam_id
   INNER JOIN sub_tb ON x_table_tb.sub_id = sub_tb.sub_id
