@@ -268,7 +268,7 @@ $uname = $_SESSION['uname'];
                         <option selected value="">Select</option>
                         <?php
                          include '../server.php';
-		                       	$sql = "SELECT fid, fname FROM fac_tb";
+		                       	$sql = "SELECT fid, fname FROM fac_tb WHERE status='1'";
 		                        $result = $conn->query($sql);
 		                        while ($row=$result->fetch_assoc()){
 		                          echo "<option value='".$row['fid']."'>".$row['fname']."</option>";
