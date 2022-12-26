@@ -322,7 +322,7 @@ if(isset($_REQUEST['allocate'])){
             $result = mysqli_query($conn, $insert);
             if($result){
                     echo "<script>alert('Faculty Allocated Successfully')</script>";
-                    echo "<script>window.location.href='add_sched.php'</script>";
+                    echo "<script>window.location.href='add_schedview.php'</script>";
             }
             else{
                     echo "<script>alert('Faculty Allocation Failed')</script>";
