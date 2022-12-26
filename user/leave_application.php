@@ -235,7 +235,7 @@ if(isset($_POST['submit'])){
   $leave_type = $_POST['leave_type'];
   $leave_date = $_POST['leave_date'];
   $reason = $_POST['reason'];
-  $sql = "INSERT INTO leave_list (fid,leave_type_id,date,reason,status,date_created,date_approved) VALUES ($fac_id,$leave_type,'$leave_date','$reason',0,current_timestamp(),NULL)";
+  $sql = "INSERT INTO leave_list (fid,leave_type_id,date,reason,status,date_created,date_approved) VALUES ($fac_id,$leave_type,'$leave_date','$reason',0,CUR_DATE(),NULL)";
   $result = $conn->query($sql);
   if($result){
     echo "<script>alert('Leave Application Submitted Successfully')</script>";
