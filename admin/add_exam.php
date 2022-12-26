@@ -263,9 +263,9 @@ if($_POST){
         $e_date = $_POST['e_date'];
         $sem_id = $_POST['sem_id'];
         $sql = "SELECT * FROM exam_tb WHERE exam_name = '$ex_name'";
-        $result = mysqli_query($conn, $sql);
-        if(mysqli_num_rows($result) > 0){
-          while($row = mysqli_fetch_assoc($result)){
+        $result0 = mysqli_query($conn, $sql);
+        if(mysqli_num_rows($result0) > 0){
+          while($row = mysqli_fetch_assoc($result0)){
             if($row['exam_name'] == $ex_name && $row['sem_id'] == $sem_id){
               echo "<script>alert('Examination Already Exists!');</script>";
             }
