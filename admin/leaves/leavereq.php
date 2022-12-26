@@ -176,7 +176,6 @@ $uname = $_SESSION['uname'];
         <strong><?php echo $uname;?></strong>
       </a>
       <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
-        <li><hr class="dropdown-divider"></li>
         <li><a class="dropdown-item" href="../../logout.php">Sign out</a></li>
       </ul>
     </div>
