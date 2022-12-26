@@ -216,7 +216,7 @@ $uname = $_SESSION['uname'];
         </a>
       </li>
       <li>
-        <a href="add_sched.php" class="nav-link active" aria-current="page">                   
+        <a href="add_schedview.php" class="nav-link active" aria-current="page">                   
           <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#table"/></svg>
           Create Schedule
         </a>
