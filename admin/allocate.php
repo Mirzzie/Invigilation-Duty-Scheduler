@@ -296,7 +296,7 @@ $uname = $_SESSION['uname'];
     <div class="hstack gap-3">
     <button type="submit" class="btn btn-outline-primary" name="allocate">allocate</button>
   <div class="vr"></div>
-  <a class='btn btn-outline-primary' href='add_schedview.php'>Go back</a>
+  <a class='btn btn-outline-secondary' href="add_schedview.php">Go back</a>
 </div>
 </form>
 </tr>
