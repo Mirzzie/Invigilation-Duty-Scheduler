@@ -243,6 +243,7 @@ if (isset($_REQUEST['view'])) {
   echo "<th>Subject</th>";
   echo "</tr></thead>";
   echo "<tbody>";
+  $exam_id = $_POST['exam_id'];
 
   // Iterate over the rows in the result set
   while ($row = mysqli_fetch_assoc($result)) {
