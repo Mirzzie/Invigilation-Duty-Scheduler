@@ -230,6 +230,7 @@ if(isset($_REQUEST['view'])){
       echo "<th>Time</th>";
 			echo	"<th>Course</th>";
       echo "<th>Subject</th>";
+      echo "<th>Action</th>";
       echo "</tr></thead>";
         $exam_id = $_POST['exam_id'];
 
@@ -243,7 +244,7 @@ if(isset($_REQUEST['view'])){
           echo "<td>".$row['time']."</td>";
           echo "<td>".$row['dname']."</td>";
           echo "<td>".$row['sub_name']."</td>";
-          echo "<td><a class='btn btn-outline-primary' href='allocate.php?table_id=$table_id'>Allocate</a></td>";
+          echo "<td><a class='btn btn-outline-primary' href='allocate.php?table_id=$table_id'>allocate</a></td>";
           echo "</tr></tbody>";
         }
  echo "</table></div>";
