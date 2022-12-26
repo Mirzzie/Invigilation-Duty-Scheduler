@@ -242,7 +242,7 @@ if(isset($_REQUEST['view'])){
           echo "<td>".$row['time']."</td>";
           echo "<td>".$row['dname']."</td>";
           echo "<td>".$row['sub_name']."</td>";
-          echo "<td><a class='btn-btn-primary' href='allocate.php?table_id=$table_id'>Allocate</a></td>";
+          echo "<td><button class='btn-btn-primary'><a href='allocate.php?table_id=$table_id'>Allocate</a></button></td>";
           echo "</tr></tbody>";
         }
  echo "</table></div>";
