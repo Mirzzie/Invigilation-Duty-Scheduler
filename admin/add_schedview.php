@@ -218,55 +218,38 @@ $uname = $_SESSION['uname'];
     </tr>
     </table>
     </div>
-    </div>
-    </div>
-
-    <?php
+    
+<?php
 include '../server.php';
-
-// Check if the 'view' request parameter has been set
-if (isset($_REQUEST['view'])) {
-  // Create a connection to the database
-
-  // Prepare the SELECT statement
-  $fetch_table="SELECT * FROM exam_tb,x_table_tb, dep_tb,sub_tb WHERE dep_tb.depid= sub_tb.depid AND sub_tb.sub_id= x_table_tb.sub_id AND exam_tb.exam_id=$exam_id AND x_table_tb.exam_id=$exam_id";
-  // echo $fetch_table;
-  $result = mysqli_query($conn, $fetch_table);
-
-  // Start building the HTML table
+if(isset($_REQUEST['view'])){
   echo "<div class='card'>";
-  echo "<table id='data_table' class='table table-bordered border-dark'>";
-  echo "<thead><tr>";
-  echo "<th>Date</th>";
-  echo "<th>Time</th>";
-  echo "<th>Course</th>";
-  echo "<th>Subject</th>";
-  echo "</tr></thead>";
-  echo "<tbody>";
-  $exam_id = $_POST['exam_id'];
+      echo "<table id='data_table' class='table table-bordered border-dark'>";
+		echo "<thead><tr>";
+			echo	"<th>Date</th>";
+      echo "<th>Time</th>";
+			echo	"<th>Course</th>";
+      echo "<th>Subject</th>";
+      echo "</tr></thead>";
+        $exam_id = $_POST['exam_id'];
 
-  // Iterate over the rows in the result set
-  while ($row = mysqli_fetch_assoc($result)) {
-    // Generate a table row for each row in the result set
-    echo "<tr>";
-    echo "<td>" . $row['x_date'] . "</td>";
-    echo "<td>" . $row['time'] . "</td>";
-    echo "<td>" . $row['dname'] . "</td>";
-    echo "<td>" . $row['sub_name'] . "</td>";
-    echo "<td><a class='btn-btn-primary' href='allocate.php?table_id=" . $row['table_id'] . "'>Allocate</a></td>";
-    echo "</tr>";
+        $fetch_table="SELECT * FROM exam_tb,x_table_tb, dep_tb,sub_tb WHERE dep_tb.depid= sub_tb.depid AND sub_tb.sub_id= x_table_tb.sub_id AND exam_tb.exam_id=$exam_id AND x_table_tb.exam_id=$exam_id";
+        // echo $fetch_table;
+        $result = mysqli_query($conn, $fetch_table);
+        while($row=$result->fetch_assoc()){
+          $table_id = $row['table_id'];
+          echo "<tbody><tr>";
+          echo "<td>".$row['x_date']."</td>";
+          echo "<td>".$row['time']."</td>";
+          echo "<td>".$row['dname']."</td>";
+          echo "<td>".$row['sub_name']."</td>";
+          echo "<td><a class='btn-btn-primary' href='allocate.php?table_id=$table_id'>Allocate</a></td>";
+          echo "</tr></tbody>";
+        }
+ echo "</table></div>";
   }
-
-  // Close the table and container elements
-  echo "</tbody></table></div>";
-
-  // Close the database connection
-}
 ?>
-<<<<<<< HEAD
+</div>
 
-=======
->>>>>>> parent of 77ad689 (check1)
 
 <script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha384-GNFwBvfVxBkLMJpYMOABq3c+d3KnQxudP/mGPkzpZSTYykLBNsZEnG2D9G/X/+7D" crossorigin="anonymous" async></script>
 
