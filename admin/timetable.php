@@ -251,13 +251,13 @@ $uname = $_SESSION['uname'];
             ?>
         </td>
       </tr>
-    </form>
-    <button type="submit" class="btn btn-outline-primary mb-3" name="submit">SUBMIT</button>
-    </tbody>
-  </table>
-</div>
-
-</div>
+      </tbody>
+      </table>
+      <div class="card-footer">
+        <button type="submit" name="submit" class="btn btn-outline-primary">Add Timetable</button>
+      </div>
+      </form>
+    </div>
 
 <?php
 include '../server.php';
