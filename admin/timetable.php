@@ -256,6 +256,7 @@ $uname = $_SESSION['uname'];
     </form>
   </table>
 </div>
+</div>
 
 <?php
 include '../server.php';
