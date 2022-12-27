@@ -217,16 +217,39 @@ $uname = $_SESSION['uname'];
 			<tr>
 				<th>Date</th>
         <th>Time</th>
-				<th>Subject</th>
         <th>Course</th>
+				<th>Subject</th>
      </tr>
 		</thead>
 		<tbody>
       <tr>
         <td><input type="date" name="date" class="form-control" required></td>
         <td><input type="time" name="time" class="form-control" required></td>
-        <td><input type="text" name="subject" class="form-control" required></td>
-        <td><input type="text" name="course" class="form-control" required></td>
+        <td>
+          <select name="subject" class="form-select" required>
+            <option value="">Select Course</option>
+            <?php
+            include '../server.php';
+              $sql = "SELECT * FROM dep_tb";
+              $result = mysqli_query($conn, $sql);
+              while($row = mysqli_fetch_assoc($result)){
+                echo "<option value='".$row['depid']."'>".$row['dname']."</option>";
+              }
+            ?>
+          </select>
+      </tr>
+        <td>
+          <select name="subject" class="form-select" required>
+            <option value="">Select Subject</option>
+            <?php
+              include '../server.php';
+              $sql = "SELECT * FROM sub_tb";
+              $result = mysqli_query($conn, $sql);
+              while($row = mysqli_fetch_assoc($result)){
+                echo "<option value='".$row['sub_id']."'>".$row['sub_name']."</option>";
+              }
+            ?>
+          </select>
       </tr>
     </tbody>
     <tfoot>
