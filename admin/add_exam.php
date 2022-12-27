@@ -251,6 +251,49 @@ $uname= $_SESSION['uname'];
     </table>
     </div>
 
+<!-- edit exam -->
+
+<div class="card">
+  <h5 class="card-header">EDIT EXAM DETAILS</h5>
+
+  <form method="POST" action="" style= "padding: 30px; width: 880px;">
+  
+  <label for="inputPassword" class="col-sm-2 col-form-label">Name of the Examination</label>
+        <table>
+      <tr>
+      <select name="ex_name" class="form-select" aria-label="Default select example" required>
+                        <option selected value="">Select </option>
+                        <?php
+                         include '../server.php';
+		                       	$sql = "SELECT exam_id,exam_name FROM exam_tb";
+		                        $result = $conn->query($sql);
+		                        while ($row=$result->fetch_assoc()){
+		                          echo "<option value='".$row['exam_id']."'>".$row['exam_name']."</option>";
+		                        }
+		                    	?>
+      </select>
+    <label for="inputPassword" class="col-sm-2 col-form-label">Semester</label>
+    <tr>
+    <select name="sem_id" class="form-select" aria-label="Default select example" required>
+                        <option selected value="">Select </option>
+                        <?php
+                         include '../server.php';
+		                       	$sql = "SELECT sem_id,sem_name FROM sem_tb";
+		                        $result = $conn->query($sql);
+		                        while ($row=$result->fetch_assoc()){
+		                          echo "<option value='".$row['sem_id']."'>".$row['sem_name']."</option>";
+		                        }
+		                    	?>
+      </select>
+    </tr>
+    <tr>
+    <button type="submit" class="btn btn-primary mb-3" name="sub">Search</button>
+    </form>
+    </tr>
+    </table>
+    </div>
+
+
 <script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha384-GNFwBvfVxBkLMJpYMOABq3c+d3KnQxudP/mGPkzpZSTYykLBNsZEnG2D9G/X/+7D" crossorigin="anonymous" async></script>
 </main>
 
