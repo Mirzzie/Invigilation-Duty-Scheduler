@@ -251,9 +251,9 @@ $uname = $_SESSION['uname'];
             ?>
         </td>
       </tr>
-    </tbody>
-    <button type="submit" class="btn btn-outline-primary mb-3" name="submit">SUBMIT</button>
     </form>
+    <button type="submit" class="btn btn-outline-primary mb-3" name="submit">SUBMIT</button>
+    </tbody>
   </table>
 </div>
 
