@@ -268,8 +268,8 @@ if(isset($_POST['submit'])){
   $subject = $_POST['sub_id'];
   $sql = "INSERT INTO x_table_tb (sub_id,exam_id,x_date,time) VALUES ($subject,$depid,'$date','$time')";
   echo $sql;
-  $result = mysqli_query($conn, $sql);
-  if($result){
+  $result1 = mysqli_query($conn, $sql);
+  if($result1){
     echo "<script>alert('Exam added successfully');</script>";
   }
   else{
