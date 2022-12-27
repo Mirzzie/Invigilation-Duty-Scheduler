@@ -240,10 +240,10 @@ $uname = $_SESSION['uname'];
           </select>
         <?php
           include '../server.php';
-          $sql = "SELECT dname ,depid FROM dep_tb , sub_tb WHERE dep_tb.depid = sub_tb.depid AND sub_id = $sub_id";
+          $sql = "SELECT dname ,depid FROM dep_tb , sub_tb WHERE dep_tb.depid = sub_tb.depid AND sub_id = '$sub_id'";
           $result = mysqli_query($conn, $sql);
           while($row = mysqli_fetch_assoc($result)){
-            echo ".$row['dname'].";
+            echo "<td>".$row['dname']."</td>";
           }
           ?>
       </tr>
