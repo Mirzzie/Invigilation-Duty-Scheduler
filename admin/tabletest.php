@@ -252,11 +252,7 @@ $uname = $_SESSION['uname'];
           </select>
       </tr>
     </tbody>
-    <tfoot>
-      <tr>
-        <td colspan="4"><input type="submit" name="submit" class="btn btn-primary" value="Add Exam"></td>
-      </tr>
-    </tfoot>
+        <input type="submit" name="submit" class="btn btn-primary" value="Add Exam">
   </form>
   </table>
   </div>
