@@ -222,59 +222,24 @@ $uname = $_SESSION['uname'];
      </tr>
 		</thead>
 		<tbody>
-			<?php
-      $ex_name=$_GET['ex_name'];
-      include '../server.php';
-      $sql_query = "SELECT DISTINCT sub_name, dname FROM sub_tb, dep_tb, x_table_tb, exam_tb, sem_tb WHERE sub_tb.sem_id=exam_tb.sem_id AND sub_tb.depid= dep_tb.depid AND exam_tb.exam_name='$ex_name'";
-			$resultset = mysqli_query($conn, $sql_query) or die("database error:". mysqli_error($conn));
-			while( $row = mysqli_fetch_assoc($resultset) ) {
-			?>
-			   <tr id="<?php echo $row ['table_id']; ?>">
-         <td><input type="date" class="form-control"  name="x_date<?php echo $row ['table_id']; ?>" required></td>
-			   <td><input type="time" class="form-control"  name="x_time<?php echo $row ['table_id']; ?>" required></td>
-			   <td><?php echo $row ['sub_name']; ?></td>
-			   <td><?php echo $row ['dname']; ?></td>
-			   </tr>
-			<?php } ?>
-      <button type="submit" class="btn btn-primary mb-3" name="sub">SUBMIT</button>
-    </form>
-		</tbody>
-		</table>
+      <tr>
+        <td><input type="date" name="date" class="form-control" required></td>
+        <td><input type="time" name="time" class="form-control" required></td>
+        <td><input type="text" name="subject" class="form-control" required></td>
+        <td><input type="text" name="course" class="form-control" required></td>
+      </tr>
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="4"><input type="submit" name="submit" class="btn btn-primary" value="Add Exam"></td>
+      </tr>
+    </tfoot>
+  </form>
+  </table>
   </div>
-  
-
-<?php
-include '../server.php';
-if(isset($_REQUEST['sub'])){
-  if($_POST)
-    {
-        $ex_name = $_POST['ex_name'];
-        $s_date = $_POST['s_date'];
-        $e_date = $_POST['e_date'];
-        $semid = $_POST['sem_id'];
-
-        $query = "INSERT INTO exam_tb (exam_name,start_date,end_date,sem_id,status) VALUES('$ex_name','$s_date','$e_date','$semid',1)";
-                $result = mysqli_query($conn, $query);
-                  if($result)
-                  {
-                    echo "<script>window.location.replace('tabletest.php');</script>";
-                 
-                 }
-                  else
-                  {
-                    echo "Data not Inserted";
-                  }
-
-
-    }
-  }
-?>
 <script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha384-GNFwBvfVxBkLMJpYMOABq3c+d3KnQxudP/mGPkzpZSTYykLBNsZEnG2D9G/X/+7D" crossorigin="anonymous" async></script>
 </main>
-
-
-    <script src="../assets/js/bootstrap.bundle.min.js"></script>
-
-      <script src="../assets/js/sidebars.js"></script>
-  </body>
+<script src="../assets/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/js/sidebars.js"></script>
+</body>
 </html>
