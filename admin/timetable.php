@@ -253,9 +253,9 @@ $uname = $_SESSION['uname'];
         </td>
       </tr>
     </tbody>
+    <input type="submit" name="submit" class="btn btn-outline-primary" value="Add timetable">
+    </form>
   </table>
- <input type="submit" name="submit" class="btn btn-outline-primary" value="Add timetable">
-</form>
 </div>
 
 <?php
@@ -266,7 +266,6 @@ if(isset($_POST['submit'])){
   $subject = $_POST['sub_id'];
   $sql = "INSERT INTO x_table_tb (sub_id,exam_id,x_date,time) VALUES ($subject,$exam_id,'$date','$time')";
   $result1 = mysqli_query($conn, $sql);
-  echo $sql;
   if($result1){
     echo "<script>alert('Exam added successfully');</script>";
   }
