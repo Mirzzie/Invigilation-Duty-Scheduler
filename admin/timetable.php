@@ -238,14 +238,20 @@ $uname = $_SESSION['uname'];
               }
             ?>
           </select>
-        <?php
-          include '../server.php';
-          $sql = "SELECT dname ,depid FROM dep_tb";
-          $result = mysqli_query($conn, $sql);
-          while($row = mysqli_fetch_assoc($result)){
-            echo "<option value='".$row['depid']."'>".$row['dname']."</option>";
-          }
-        ?>
+        </td>
+        <td>
+          <select name="depid" class="form-select" required>
+            <option value="">Select Subject</option>
+            <?php
+              include '../server.php';
+              $sql = "SELECT * FROM dep_tb";
+              $result = mysqli_query($conn, $sql);
+              while($row = mysqli_fetch_assoc($result)){
+                echo "<option value='".$row['depid']."'>".$row['dname']."</option>";
+              }
+            ?>
+          </select>
+        </td>
       </tr>
     </tbody>
    </form>
