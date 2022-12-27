@@ -180,7 +180,7 @@ $uname= $_SESSION['uname'];
         </a>
       </li>
       <li>
-        <a href="#" class="nav-link text-white">
+        <a href="./leaves/leavereq.php" class="nav-link text-white">
           <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#grid"/></svg>
           Leave Requests
         </a>
@@ -277,7 +277,7 @@ if($_POST){
                 if($result)
                 {
                   echo "<script>alert('Examination Added !');</script>";
-                  echo "<script>window.location.replace('tabletest.php?ex_name=$ex_name');</script>";
+                  echo "<script>window.location.replace('timetable.php?ex_name=$ex_name');</script>";
                }
                 else
                 {
