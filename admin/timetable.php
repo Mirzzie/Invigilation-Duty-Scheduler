@@ -211,7 +211,7 @@ $uname = $_SESSION['uname'];
   <div class="card">
   <h5 class="card-header">EXAM TIME TABLE</h5>
       <table id="data_table" class="table table-bordered border-dark">
-      <form method="POST" action="" style= "padding: 30px; width: 880px;">
+      <form method="POST" action="">
 		<thead>
 			<tr>
 				<th>Date</th>
@@ -254,8 +254,9 @@ $uname = $_SESSION['uname'];
     </tbody>
     </form>
   </table>
+  <input type="submit" name="submit" class="btn btn-outline-primary" value="Add timetable">
 </div>
-<input type="submit" name="submit" class="btn btn-outline-primary" value="Add timetable">
+
 </div>
 
 <?php
