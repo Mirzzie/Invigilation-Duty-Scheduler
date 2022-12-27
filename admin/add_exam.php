@@ -256,7 +256,7 @@ $uname= $_SESSION['uname'];
 <div class="card">
   <h5 class="card-header">EDIT EXAM DETAILS</h5>
 
-  <form method="POST" action="" style= "padding: 30px; width: 880px;">
+  <form method="POST" action="">
   
   <label for="inputPassword" class="col-sm-2 col-form-label">Name of the Examination</label>
         <table>
@@ -290,7 +290,8 @@ $uname= $_SESSION['uname'];
     </tr>
     <tr>
     <br>
-    <a class='btn btn-outline-primary' href='timetable.php?exam_name=$ex_name?sem_id=$sem_id'>Edit</a>
+    <button type="submit" class="btn btn-primary mb-3" name="edit">SUBMIT<a href='timetable.php?exam_name=$ex_name?sem_id=$sem_id'></a></button>
+    <!-- <a class='btn btn-outline-primary'name="edit" href='timetable.php?exam_name=$ex_name?sem_id=$sem_id'>Edit</a> -->
     </form>
     </tr>
     </table>
