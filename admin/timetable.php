@@ -252,10 +252,11 @@ $uname = $_SESSION['uname'];
         </td>
       </tr>
     </tbody>
-    <input type="submit" name="submit" class="btn btn-outline-primary" value="Add timetable">
     </form>
   </table>
+  <input type="submit" name="submit" class="btn btn-outline-primary" value="Add timetable">
 </div>
+
 </div>
 
 <?php
