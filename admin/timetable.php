@@ -240,17 +240,16 @@ $uname = $_SESSION['uname'];
           </select>
         </td>
         <td>
-          <select name="depid" class="form-select" required>
-            <option value="">Select Subject</option>
             <?php
+              $ex_name = $_GET['ex_name'];
               include '../server.php';
-              $sql = "SELECT * FROM dep_tb";
+              $sql = "SELECT exam_id,exam_name FROM table_tb WHERE exam_name = '$ex_name'";
               $result = mysqli_query($conn, $sql);
               while($row = mysqli_fetch_assoc($result)){
-                echo "<option value='".$row['depid']."'>".$row['dname']."</option>";
+                echo "<input type='text' name='dname' value='".$row['exam_name']."'>";
+                $exam_id = $row['exam_id'];
               }
             ?>
-          </select>
         </td>
       </tr>
     </tbody>
@@ -264,9 +263,8 @@ include '../server.php';
 if(isset($_POST['submit'])){
   $date = $_POST['date'];
   $time = $_POST['time'];
-  $depid = $_POST['depid'];
   $subject = $_POST['sub_id'];
-  $sql = "INSERT INTO x_table_tb (sub_id,exam_id,x_date,time) VALUES ($subject,$depid,'$date','$time')";
+  $sql = "INSERT INTO x_table_tb (sub_id,exam_id,x_date,time) VALUES ($subject,$exam_id,'$date','$time')";
   $result1 = mysqli_query($conn, $sql);
   echo $sql;
   if($result1){
