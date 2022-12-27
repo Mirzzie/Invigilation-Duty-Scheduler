@@ -243,7 +243,7 @@ $uname = $_SESSION['uname'];
           $result = mysqli_query($conn, $sql);
           while($row = mysqli_fetch_assoc($result)){
             echo "<td>".$row['dname']."</td>";
-            $depid = $row['dep_id'];
+            $depid = $row['depid'];
           }
           ?>
       </tr>
