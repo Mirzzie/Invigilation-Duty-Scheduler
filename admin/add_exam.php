@@ -269,6 +269,7 @@ $uname= $_SESSION['uname'];
 		                        $result = $conn->query($sql);
 		                        while ($row=$result->fetch_assoc()){
 		                          echo "<option value='".$row['exam_id']."'>".$row['exam_name']."</option>";
+                              $ex_name=$row['exam_name'];
 		                        }
 		                    	?>
       </select>
@@ -282,12 +283,14 @@ $uname= $_SESSION['uname'];
 		                        $result = $conn->query($sql);
 		                        while ($row=$result->fetch_assoc()){
 		                          echo "<option value='".$row['sem_id']."'>".$row['sem_name']."</option>";
+                              $sem_id=$row['sem_id'];
 		                        }
 		                    	?>
       </select>
     </tr>
     <tr>
-    <button type="submit" class="btn btn-primary mb-3" name="sub">Search</button>
+    <br>
+    <a class='btn btn-outline-primary' href='timetable.php?exam_name=$ex_name?sem_id=$sem_id'>Edit</a>
     </form>
     </tr>
     </table>
