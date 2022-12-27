@@ -243,12 +243,12 @@ $uname = $_SESSION['uname'];
             <?php
               $ex_name = $_GET['ex_name'];
               include '../server.php';
-              $sql = "SELECT exam_id,exam_name FROM table_tb WHERE exam_name = $ex_name";
+              $sql = "SELECT exam_id,exam_name FROM exam_tb WHERE exam_name = '$ex_name'";
               $result = mysqli_query($conn, $sql);
-              $row = mysqli_fetch_assoc($result);
-              $exam_id = $row['exam_id'];
-              $exam_name = $row['exam_name'];
-              echo $exam_name;
+              while($row = mysqli_fetch_assoc($result)){
+                echo "<input type='text' name='dname' value='".$row['exam_name']."'>";
+                $exam_id = $row['exam_id'];
+              }
             ?>
         </td>
       </tr>
