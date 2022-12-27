@@ -217,8 +217,8 @@ $uname = $_SESSION['uname'];
 			<tr>
 				<th>Date</th>
         <th>Time</th>
-        <th>Course</th>
 				<th>Subject</th>
+        <th>Course</th>
      </tr>
 		</thead>
 		<tbody>
