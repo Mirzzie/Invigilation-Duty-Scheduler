@@ -254,10 +254,14 @@ $uname = $_SESSION['uname'];
       </tbody>
       </table>
       <div class="card-footer">
-        <button type="submit" name="submit" class="btn btn-outline-primary">Add Timetable</button>
-      </div>
-      </form>
-    </div>
+      <div class="hstack gap-3">
+    <button type="submit" class="btn btn-outline-primary" name="submit">Add Timetable</button>
+  <div class="vr"></div>
+  <a class='btn btn-outline-secondary' href="add_exam.php">Go back</a>
+  </div>
+  </div>
+  </form>
+  </div>
 
 <?php
 include '../server.php';
