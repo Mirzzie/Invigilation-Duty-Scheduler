@@ -210,7 +210,6 @@ $uname = $_SESSION['uname'];
   <div class="d-flex flex-column flex-grow-1" style="padding: 30px; overflow:auto;">
   <div class="card">
   <h5 class="card-header">EXAM TIME TABLE</h5>
-  <div class="card">
       <table id="data_table" class="table table-bordered border-dark">
       <form method="POST" action="" style= "padding: 30px; width: 880px;">
 		<thead>
