@@ -245,10 +245,10 @@ $uname = $_SESSION['uname'];
               include '../server.php';
               $sql = "SELECT exam_id,exam_name FROM table_tb WHERE exam_name = '$ex_name'";
               $result = mysqli_query($conn, $sql);
-              while($row = mysqli_fetch_assoc($result)){
-                echo "<input type='text' name='dname' value='".$row['exam_name']."'>";
-                $exam_id = $row['exam_id'];
-              }
+              $row = mysqli_fetch_assoc($result);
+              $exam_id = $row['exam_id'];
+              $exam_name = $row['exam_name'];
+              echo $exam_name;
             ?>
         </td>
       </tr>
