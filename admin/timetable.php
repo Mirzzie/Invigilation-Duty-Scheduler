@@ -227,7 +227,7 @@ $uname = $_SESSION['uname'];
         <td><input type="date" name="date" class="form-control" required></td>
         <td><input type="time" name="time" class="form-control" required></td>
         <td>
-          <select name="subject" class="form-select" required>
+          <select name="sub_id" class="form-select" required>
             <option value="">Select Subject</option>
             <?php
               include '../server.php';
