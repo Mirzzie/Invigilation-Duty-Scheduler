@@ -223,7 +223,6 @@ $uname = $_SESSION['uname'];
 		</thead>
 		<tbody>
 			<?php
-
       $ex_name=$_GET['ex_name'];
       include '../server.php';
       $sql_query = "SELECT DISTINCT sub_name, dname FROM sub_tb, dep_tb, x_table_tb, exam_tb, sem_tb WHERE sub_tb.sem_id=exam_tb.sem_id AND sub_tb.depid= dep_tb.depid AND exam_tb.exam_name='$ex_name'";
@@ -235,11 +234,9 @@ $uname = $_SESSION['uname'];
 			   <td><input type="time" class="form-control"  name="x_time<?php echo $row ['table_id']; ?>" required></td>
 			   <td><?php echo $row ['sub_name']; ?></td>
 			   <td><?php echo $row ['dname']; ?></td>
-			   
 			   </tr>
 			<?php } ?>
       <button type="submit" class="btn btn-primary mb-3" name="sub">SUBMIT</button>
-    
     </form>
 		</tbody>
 		</table>
