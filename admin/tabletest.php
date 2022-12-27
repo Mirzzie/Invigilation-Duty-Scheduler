@@ -237,7 +237,6 @@ $uname = $_SESSION['uname'];
               }
             ?>
           </select>
-      </tr>
         <td>
           <select name="subject" class="form-select" required>
             <option value="">Select Subject</option>
