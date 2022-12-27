@@ -227,18 +227,6 @@ $uname = $_SESSION['uname'];
         <td><input type="time" name="time" class="form-control" required></td>
         <td>
           <select name="subject" class="form-select" required>
-            <option value="">Select Course</option>
-            <?php
-            include '../server.php';
-              $sql = "SELECT * FROM dep_tb";
-              $result = mysqli_query($conn, $sql);
-              while($row = mysqli_fetch_assoc($result)){
-                echo "<option value='".$row['depid']."'>".$row['dname']."</option>";
-              }
-            ?>
-          </select>
-        <td>
-          <select name="subject" class="form-select" required>
             <option value="">Select Subject</option>
             <?php
               include '../server.php';
@@ -249,12 +237,39 @@ $uname = $_SESSION['uname'];
               }
             ?>
           </select>
+        <?php
+          include '../server.php';
+          $sql = "SELECT dname FROM dep_tb , sub_tb WHERE dep_tb.dep_id = sub_tb.dep_id";
+          $result = mysqli_query($conn, $sql);
+          while($row = mysqli_fetch_assoc($result)){
+            echo "<td>".$row['dname']."</td>";
+            $depid = $row['dep_id'];
+          }
+          ?>
       </tr>
     </tbody>
-        <input type="submit" name="submit" class="btn btn-primary" value="Add Exam">
-  </form>
+   </form>
   </table>
-  </div>
+ <input type="submit" name="submit" class="btn btn-outline-primary" value="Add timetable">
+</div>
+
+<?php
+include '../server.php';
+if(isset($_POST['submit'])){
+  $date = $_POST['date'];
+  $time = $_POST['time'];
+  $depid = $_POST['depid'];
+  $subject = $_POST['sub_id'];
+  $sql = "INSERT INTO x_table_tb (sub_id,exam_id,x_date,time) VALUES ($subject,$depid,'$date','$time')";
+  $result = mysqli_query($conn, $sql);
+  if($result){
+    echo "<script>alert('Exam added successfully');</script>";
+  }
+  else{
+    echo "<script>alert('Exam not added');</script>";
+  }
+}
+?>
 <script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha384-GNFwBvfVxBkLMJpYMOABq3c+d3KnQxudP/mGPkzpZSTYykLBNsZEnG2D9G/X/+7D" crossorigin="anonymous" async></script>
 </main>
 <script src="../assets/js/bootstrap.bundle.min.js"></script>
