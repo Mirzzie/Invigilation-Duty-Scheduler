@@ -254,7 +254,7 @@ $uname = $_SESSION['uname'];
     </tbody>
     </form>
   </table>
-  <input type="submit" name="submit" class="btn btn-outline-primary" value="Add timetable">
+  <button type="submit" class="btn btn-outline-primary mb-3" name="submit">SUBMIT</button>
 </div>
 
 </div>
