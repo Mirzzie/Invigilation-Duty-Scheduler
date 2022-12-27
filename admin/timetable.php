@@ -234,16 +234,16 @@ $uname = $_SESSION['uname'];
               $result = mysqli_query($conn, $sql);
               while($row = mysqli_fetch_assoc($result)){
                 echo "<option value='".$row['sub_id']."'>".$row['sub_name']."</option>";
+                $sub_id = $row['sub_id'];
               }
             ?>
           </select>
         <?php
           include '../server.php';
-          $sql = "SELECT dname FROM dep_tb , sub_tb WHERE dep_tb.dep_id = sub_tb.dep_id";
+          $sql = "SELECT dname ,depid FROM dep_tb , sub_tb WHERE dep_tb.depid = sub_tb.depid AND sub_id = $sub_id";
           $result = mysqli_query($conn, $sql);
           while($row = mysqli_fetch_assoc($result)){
-            echo "<td>".$row['dname']."</td>";
-            $depid = $row['depid'];
+            echo ".$row['dname'].";
           }
           ?>
       </tr>
