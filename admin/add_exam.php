@@ -256,7 +256,7 @@ $uname= $_SESSION['uname'];
 <div class="card">
   <h5 class="card-header">EDIT EXAM DETAILS</h5>
 
-  <form method="POST" action="">
+  <form method="POST" action="" style= "padding: 30px; width: 880px;">
   
   <label for="inputPassword" class="col-sm-2 col-form-label">Name of the Examination</label>
         <table>
@@ -290,8 +290,7 @@ $uname= $_SESSION['uname'];
     </tr>
     <tr>
     <br>
-    <button type="submit" class="btn btn-primary mb-3" name="edit">SUBMIT<a href='timetable.php?exam_name=$ex_name?sem_id=$sem_id'></a></button>
-    <!-- <a class='btn btn-outline-primary'name="edit" href='timetable.php?exam_name=$ex_name?sem_id=$sem_id'>Edit</a> -->
+    <button type="submit" class="btn btn-primary mb-3" name="edit">EDIT</button>
     </form>
     </tr>
     </table>
@@ -330,6 +329,27 @@ if($_POST){
                 {
                   echo "<script>alert('Failed to Add Examination!');</script>";
                 }
+    }
+    }
+  }
+?>
+<?php
+include '../server.php';
+if(isset($_REQUEST['edit'])){
+if($_POST){
+        $ex_name = $_POST['ex_name'];
+        $sem_id = $_POST['sem_id'];
+        $sql = "SELECT * FROM exam_tb WHERE exam_id = '$ex_name'";
+        $result0 = mysqli_query($conn, $sql);
+        if(mysqli_num_rows($result0) > 0){
+          while($row = mysqli_fetch_assoc($result0)){
+            if($row['exam_id'] == $ex_name && $row['sem_id'] == $sem_id){
+              echo "<script>window.location.replace('timetable.php?ex_name=$ex_name');</script>";
+            }
+          }
+        }
+      else{
+        echo "<script>alert('Examination Not Found!');</script>";
     }
     }
   }
