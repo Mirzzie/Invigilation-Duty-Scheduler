@@ -210,9 +210,8 @@ $uname = $_SESSION['uname'];
   <div class="d-flex flex-column flex-grow-1" style="padding: 30px; overflow:auto;">
   <div class="card">
   <h5 class="card-header">EXAM TIME TABLE</h5>
-  <div class="card">
       <table id="data_table" class="table table-bordered border-dark">
-      <form method="POST" action="" style= "padding: 30px; width: 880px;">
+      <form method="POST" action="">
 		<thead>
 			<tr>
 				<th>Date</th>
@@ -222,62 +221,67 @@ $uname = $_SESSION['uname'];
      </tr>
 		</thead>
 		<tbody>
-			<?php
-
-      $ex_name=$_GET['ex_name'];
-      include '../server.php';
-      $sql_query = "SELECT DISTINCT sub_name, dname FROM sub_tb, dep_tb, x_table_tb, exam_tb, sem_tb WHERE sub_tb.sem_id=exam_tb.sem_id AND sub_tb.depid= dep_tb.depid AND exam_tb.exam_name='$ex_name'";
-			$resultset = mysqli_query($conn, $sql_query) or die("database error:". mysqli_error($conn));
-			while( $row = mysqli_fetch_assoc($resultset) ) {
-			?>
-			   <tr id="<?php echo $row ['table_id']; ?>">
-         <td><input type="date" class="form-control"  name="x_date<?php echo $row ['table_id']; ?>" required></td>
-			   <td><input type="time" class="form-control"  name="x_time<?php echo $row ['table_id']; ?>" required></td>
-			   <td><?php echo $row ['sub_name']; ?></td>
-			   <td><?php echo $row ['dname']; ?></td>
-			   
-			   </tr>
-			<?php } ?>
-      <button type="submit" class="btn btn-primary mb-3" name="sub">SUBMIT</button>
-    
-    </form>
-		</tbody>
-		</table>
+      <tr>
+        <form method="POST" action="">
+        <td><input type="date" name="date" class="form-control" required></td>
+        <td><input type="time" name="time" class="form-control" required></td>
+        <td>
+          <select name="sub_id" class="form-select" required>
+            <option value="">Select Subject</option>
+            <?php
+              include '../server.php';
+              $sql = "SELECT * FROM sub_tb";
+              $result = mysqli_query($conn, $sql);
+              while($row = mysqli_fetch_assoc($result)){
+                echo "<option value='".$row['sub_id']."'>".$row['sub_name']."</option>";
+              }
+            ?>
+          </select>
+        </td>
+        <td>
+            <?php
+              $ex_name = $_GET['ex_name'];
+              include '../server.php';
+              $sql = "SELECT exam_id,exam_name FROM exam_tb WHERE exam_name = '$ex_name'";
+              $result = mysqli_query($conn, $sql);
+              while($row = mysqli_fetch_assoc($result)){
+                echo $row['exam_name'];
+                $exam_id = $row['exam_id'];
+              }
+            ?>
+        </td>
+      </tr>
+      </tbody>
+      </table>
+      <div class="card-footer">
+      <div class="hstack gap-3">
+    <button type="submit" class="btn btn-outline-primary" name="submit">Add Timetable</button>
+  <div class="vr"></div>
+  <a class='btn btn-outline-secondary' href="add_exam.php">Go back</a>
   </div>
-  
+  </div>
+  </form>
+  </div>
 
 <?php
 include '../server.php';
-if(isset($_REQUEST['sub'])){
-  if($_POST)
-    {
-        $ex_name = $_POST['ex_name'];
-        $s_date = $_POST['s_date'];
-        $e_date = $_POST['e_date'];
-        $semid = $_POST['sem_id'];
-
-        $query = "INSERT INTO exam_tb (exam_name,start_date,end_date,sem_id,status) VALUES('$ex_name','$s_date','$e_date','$semid',1)";
-                $result = mysqli_query($conn, $query);
-                  if($result)
-                  {
-                    echo "<script>window.location.replace('tabletest.php');</script>";
-                 
-                 }
-                  else
-                  {
-                    echo "Data not Inserted";
-                  }
-
-
-    }
+if(isset($_POST['submit'])){
+  $date = $_POST['date'];
+  $time = $_POST['time'];
+  $subject = $_POST['sub_id'];
+  $sql = "INSERT INTO x_table_tb (sub_id,exam_id,x_date,time) VALUES ($subject,$exam_id,'$date','$time')";
+  $result1 = mysqli_query($conn, $sql);
+  if($result1){
+    echo "<script>alert('Exam added successfully');</script>";
   }
+  else{
+    echo "<script>alert('Exam not added');</script>";
+  }
+}
 ?>
 <script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha384-GNFwBvfVxBkLMJpYMOABq3c+d3KnQxudP/mGPkzpZSTYykLBNsZEnG2D9G/X/+7D" crossorigin="anonymous" async></script>
 </main>
-
-
-    <script src="../assets/js/bootstrap.bundle.min.js"></script>
-
-      <script src="../assets/js/sidebars.js"></script>
-  </body>
+<script src="../assets/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/js/sidebars.js"></script>
+</body>
 </html>

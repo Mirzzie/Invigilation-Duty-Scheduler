@@ -180,7 +180,7 @@ $uname= $_SESSION['uname'];
         </a>
       </li>
       <li>
-        <a href="#" class="nav-link text-white">
+        <a href="./leaves/leavereq.php" class="nav-link text-white">
           <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#grid"/></svg>
           Leave Requests
         </a>
@@ -251,24 +251,79 @@ $uname= $_SESSION['uname'];
     </table>
     </div>
 
+<!-- edit exam -->
+
+<div class="card">
+  <h5 class="card-header">EDIT EXAM DETAILS</h5>
+
+  <form method="POST" action="" style= "padding: 30px; width: 880px;">
+  
+  <label for="inputPassword" class="col-sm-2 col-form-label">Name of the Examination</label>
+        <table>
+      <tr>
+      <select name="ex_name" class="form-select" aria-label="Default select example" required>
+                        <option selected value="">Select </option>
+                        <?php
+                         include '../server.php';
+		                       	$sql = "SELECT exam_id,exam_name FROM exam_tb";
+		                        $result = $conn->query($sql);
+		                        while ($row=$result->fetch_assoc()){
+		                          echo "<option value='".$row['exam_id']."'>".$row['exam_name']."</option>";
+                              $ex_name=$row['exam_name'];
+		                        }
+		                    	?>
+      </select>
+    <label for="inputPassword" class="col-sm-2 col-form-label">Semester</label>
+    <tr>
+    <select name="sem_id" class="form-select" aria-label="Default select example" required>
+                        <option selected value="">Select </option>
+                        <?php
+                         include '../server.php';
+		                       	$sql = "SELECT sem_id,sem_name FROM sem_tb";
+		                        $result = $conn->query($sql);
+		                        while ($row=$result->fetch_assoc()){
+		                          echo "<option value='".$row['sem_id']."'>".$row['sem_name']."</option>";
+                              $sem_id=$row['sem_id'];
+		                        }
+		                    	?>
+      </select>
+    </tr>
+    <tr>
+    <br>
+    <button type="submit" class="btn btn-primary mb-3" name="edit">EDIT</button>
+    </form>
+    </tr>
+    </table>
+    </div>
+
+
 <script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha384-GNFwBvfVxBkLMJpYMOABq3c+d3KnQxudP/mGPkzpZSTYykLBNsZEnG2D9G/X/+7D" crossorigin="anonymous" async></script>
 </main>
 
 <?php
 include '../server.php';
 if(isset($_REQUEST['sub'])){
-  if($_POST)include '../server.php';
-  {
+if($_POST){
         $ex_name = $_POST['ex_name'];
         $s_date = $_POST['s_date'];
         $e_date = $_POST['e_date'];
         $sem_id = $_POST['sem_id'];
+        $sql = "SELECT * FROM exam_tb WHERE exam_name = '$ex_name'";
+        $result0 = mysqli_query($conn, $sql);
+        if(mysqli_num_rows($result0) > 0){
+          while($row = mysqli_fetch_assoc($result0)){
+            if($row['exam_name'] == $ex_name && $row['sem_id'] == $sem_id){
+              echo "<script>alert('Examination Already Exists!');</script>";
+            }
+          }
+        }
+      else{
         $query = "INSERT INTO exam_tb (exam_name,start_date,end_date,sem_id,status) VALUES('$ex_name','$s_date','$e_date','$sem_id','1')";
                 $result = mysqli_query($conn, $query);
                 if($result)
                 {
                   echo "<script>alert('Examination Added !');</script>";
-                  echo "<script>window.location.replace('tabletest.php?ex_name=$ex_name');</script>";
+                  echo "<script>window.location.replace('timetable.php?ex_name=$ex_name');</script>";
                }
                 else
                 {
@@ -276,6 +331,28 @@ if(isset($_REQUEST['sub'])){
                 }
     }
     }
+  }
+?>
+<?php
+include '../server.php';
+if(isset($_REQUEST['edit'])){
+if($_POST){
+        $ex_name = $_POST['ex_name'];
+        $sem_id = $_POST['sem_id'];
+        $sql = "SELECT * FROM exam_tb WHERE exam_id = '$ex_name'";
+        $result0 = mysqli_query($conn, $sql);
+        if(mysqli_num_rows($result0) > 0){
+          while($row = mysqli_fetch_assoc($result0)){
+            if($row['exam_id'] == $ex_name && $row['sem_id'] == $sem_id){
+              echo "<script>window.location.replace('timetable.php?ex_name=$ex_name');</script>";
+            }
+          }
+        }
+      else{
+        echo "<script>alert('Examination Not Found!');</script>";
+    }
+    }
+  }
 ?>
     <script src="../assets/js/bootstrap.bundle.min.js"></script>
     <script src="../assets/js/sidebars.js"></script>

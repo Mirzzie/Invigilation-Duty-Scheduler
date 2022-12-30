@@ -238,7 +238,6 @@ $uname = $_SESSION['uname'];
 			while( $row = mysqli_fetch_assoc($resultset) ) {
 			?>
 			   <tr id="<?php echo $row ['exam_id']; ?>">
-
          <td><?php echo $row ['start_date']; ?></td>
 			   <td><?php echo $row ['end_date']; ?></td>
 			   <td><?php echo $row ['exam_name']; ?></td>

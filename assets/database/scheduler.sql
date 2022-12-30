@@ -2,10 +2,10 @@
 -- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Dec 20, 2022 at 03:21 PM
--- Server version: 10.4.27-MariaDB
--- PHP Version: 8.1.12
+-- Host: 127.0.0.1:3306
+-- Generation Time: Dec 30, 2022 at 10:03 AM
+-- Server version: 5.7.40
+-- PHP Version: 8.0.26
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -27,12 +27,17 @@ SET time_zone = "+00:00";
 -- Table structure for table `alloc_tb`
 --
 
-CREATE TABLE `alloc_tb` (
-  `al_id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `alloc_tb`;
+CREATE TABLE IF NOT EXISTS `alloc_tb` (
+  `al_id` int(11) NOT NULL AUTO_INCREMENT,
   `table_id` int(11) NOT NULL,
   `class_id` int(11) NOT NULL,
-  `fid` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `fid` int(11) NOT NULL,
+  PRIMARY KEY (`al_id`),
+  KEY `class` (`class_id`),
+  KEY `table_id` (`table_id`),
+  KEY `fac` (`fid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -40,10 +45,12 @@ CREATE TABLE `alloc_tb` (
 -- Table structure for table `classroom_tb`
 --
 
-CREATE TABLE `classroom_tb` (
-  `class_id` int(11) NOT NULL,
-  `room_no` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+DROP TABLE IF EXISTS `classroom_tb`;
+CREATE TABLE IF NOT EXISTS `classroom_tb` (
+  `class_id` int(11) NOT NULL AUTO_INCREMENT,
+  `room_no` varchar(20) NOT NULL,
+  PRIMARY KEY (`class_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `classroom_tb`
@@ -59,10 +66,12 @@ INSERT INTO `classroom_tb` (`class_id`, `room_no`) VALUES
 -- Table structure for table `dep_tb`
 --
 
-CREATE TABLE `dep_tb` (
-  `depid` int(11) NOT NULL,
-  `dname` varchar(200) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+DROP TABLE IF EXISTS `dep_tb`;
+CREATE TABLE IF NOT EXISTS `dep_tb` (
+  `depid` int(11) NOT NULL AUTO_INCREMENT,
+  `dname` varchar(200) NOT NULL,
+  PRIMARY KEY (`depid`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `dep_tb`
@@ -83,10 +92,12 @@ INSERT INTO `dep_tb` (`depid`, `dname`) VALUES
 -- Table structure for table `desig_tb`
 --
 
-CREATE TABLE `desig_tb` (
+DROP TABLE IF EXISTS `desig_tb`;
+CREATE TABLE IF NOT EXISTS `desig_tb` (
   `des_id` int(11) NOT NULL,
-  `desig_name` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `desig_name` varchar(100) NOT NULL,
+  PRIMARY KEY (`des_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `desig_tb`
@@ -102,14 +113,17 @@ INSERT INTO `desig_tb` (`des_id`, `desig_name`) VALUES
 -- Table structure for table `exam_tb`
 --
 
-CREATE TABLE `exam_tb` (
-  `exam_id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `exam_tb`;
+CREATE TABLE IF NOT EXISTS `exam_tb` (
+  `exam_id` int(11) NOT NULL AUTO_INCREMENT,
   `exam_name` varchar(100) NOT NULL,
   `start_date` date NOT NULL,
   `end_date` date NOT NULL,
   `sem_id` int(11) NOT NULL,
-  `status` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `status` int(11) NOT NULL,
+  PRIMARY KEY (`exam_id`),
+  KEY `semID` (`sem_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=53 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `exam_tb`
@@ -118,37 +132,10 @@ CREATE TABLE `exam_tb` (
 INSERT INTO `exam_tb` (`exam_id`, `exam_name`, `start_date`, `end_date`, `sem_id`, `status`) VALUES
 (13, 'BSc DEGREE EXAMINATION 2022', '2022-11-02', '2022-12-11', 4, 1),
 (14, 'DEGREE EXAMINATION MARCH,2023', '2022-11-12', '2022-11-30', 1, 1),
-(15, 'BSc DEGREE CBCS EXAMINATION SEPTEMBER, 2019', '2022-11-12', '2022-11-30', 1, 0),
-(16, 'abc', '2022-11-10', '2022-12-11', 3, 0),
-(17, 'eerrrrrrrr', '2022-11-10', '2022-11-13', 4, 0),
-(18, 'eerrrrrrrr', '2022-11-10', '2022-11-13', 4, 0),
-(19, 'DEGREEE ', '2022-11-30', '2022-12-11', 6, 0),
-(20, 'nami', '2022-11-04', '2022-11-04', 3, 0),
-(21, 'new examination', '2022-12-04', '2022-12-21', 2, 1),
-(22, 'new examination', '2022-12-04', '2022-12-21', 2, 1),
-(23, 'neww', '2022-12-05', '2022-12-29', 2, 1),
-(24, 'neww', '2022-12-05', '2022-12-29', 2, 1),
-(25, 'mm', '2022-12-05', '2022-12-23', 1, 1),
-(26, 'mm', '2022-12-05', '2022-12-23', 1, 1),
-(27, 'neeee', '2022-12-04', '2022-12-22', 1, 1),
-(28, 'aaaaaaaaaa', '2022-12-04', '2022-12-14', 2, 1),
-(29, 'abccccc', '2022-12-04', '2022-12-23', 3, 1),
-(30, 'abcd', '2022-12-04', '2022-12-23', 3, 1),
-(31, 'efgh', '2022-12-04', '2022-12-23', 4, 1),
-(32, 'ammm', '2022-12-04', '2022-12-15', 4, 1),
-(33, 'ammm', '2022-12-04', '2022-12-15', 4, 1),
-(34, 'jnjn', '2021-11-05', '2021-11-05', 1, 1),
-(35, 'ihnhjn', '2020-10-04', '2020-10-04', 4, 1),
-(36, 'exam 2035', '2022-12-13', '2022-12-21', 6, 1),
-(37, 'xbtbr', '2022-12-08', '2022-12-06', 6, 1),
-(38, 'rrgthtr', '2022-12-21', '2022-12-07', 3, 1),
-(39, 'nfgnfgnf', '2022-12-27', '2022-12-28', 4, 1),
-(40, 'QWERTY', '2022-12-28', '2022-12-14', 2, 1),
-(41, 'ttttttttt', '2022-11-30', '2022-11-29', 3, 1),
-(42, 'DDDDDDDD', '2022-12-13', '2022-12-05', 4, 1),
-(43, 'uukyuk', '2022-11-29', '2022-11-28', 5, 1),
-(44, 'QWERTY', '2022-11-30', '2022-12-06', 2, 1),
-(45, 'foooooooooooooooo', '2022-12-07', '2022-12-20', 3, 1);
+(46, 'BCA CBCS REGULA EXAM NOV 22', '2022-12-12', '2023-01-05', 5, 1),
+(50, 'abc', '2022-12-18', '2022-12-22', 2, 1),
+(51, 'nami', '2023-01-04', '2022-12-19', 2, 1),
+(52, 'mirzzie', '2022-12-18', '2022-12-23', 3, 1);
 
 -- --------------------------------------------------------
 
@@ -156,16 +143,20 @@ INSERT INTO `exam_tb` (`exam_id`, `exam_name`, `start_date`, `end_date`, `sem_id
 -- Table structure for table `fac_tb`
 --
 
-CREATE TABLE `fac_tb` (
-  `fid` int(11) NOT NULL,
+DROP TABLE IF EXISTS `fac_tb`;
+CREATE TABLE IF NOT EXISTS `fac_tb` (
+  `fid` int(11) NOT NULL AUTO_INCREMENT,
   `fname` varchar(100) NOT NULL,
   `phone` bigint(20) NOT NULL,
   `des_id` int(11) NOT NULL,
   `depid` int(11) NOT NULL,
   `uname` varchar(35) NOT NULL,
   `passw` varchar(20) NOT NULL,
-  `status` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `status` int(11) NOT NULL,
+  PRIMARY KEY (`fid`),
+  KEY `des_id` (`des_id`),
+  KEY `dep` (`depid`)
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `fac_tb`
@@ -185,34 +176,27 @@ INSERT INTO `fac_tb` (`fid`, `fname`, `phone`, `des_id`, `depid`, `uname`, `pass
 -- Table structure for table `leave_list`
 --
 
-CREATE TABLE `leave_list` (
-  `id` int(30) NOT NULL,
+DROP TABLE IF EXISTS `leave_list`;
+CREATE TABLE IF NOT EXISTS `leave_list` (
+  `id` int(30) NOT NULL AUTO_INCREMENT,
   `fid` int(11) NOT NULL,
   `leave_type_id` int(30) NOT NULL,
   `date` date NOT NULL,
   `reason` text NOT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT 0,
-  `date_approved` date DEFAULT NULL,
-  `date_created` date NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `status` tinyint(1) NOT NULL DEFAULT '0',
+  `date_created` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `date_approved` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `F` (`fid`),
+  KEY `L` (`leave_type_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `leave_list`
 --
 
-INSERT INTO `leave_list` (`id`, `fid`, `leave_type_id`, `date`, `reason`, `status`, `date_approved`, `date_created`) VALUES
-(14, 16, 1, '2022-11-28', 'efegeg', 1, '2022-12-07', '2022-12-07'),
-(15, 16, 1, '2022-12-19', 'egsv', 2, NULL, '2022-12-07'),
-(16, 16, 2, '2022-12-06', 'egr', 1, '2022-12-08', '2022-12-07'),
-(17, 22, 2, '2022-12-12', 'wttw3etw3e', 2, NULL, '2022-12-07'),
-(18, 21, 1, '2022-12-22', 'segwwesges', 2, NULL, '2022-12-07'),
-(19, 16, 2, '2022-12-05', 'efwefwefge', 1, '2022-12-08', '2022-12-07'),
-(20, 2, 1, '2022-12-20', 'wwfwf', 1, '2022-12-08', '2022-12-07'),
-(21, 20, 2, '2022-11-29', 'errhg5e5heh', 2, NULL, '2022-12-07'),
-(22, 2, 1, '2022-12-06', 'erg54h45eh4r', 2, NULL, '2022-12-07'),
-(23, 2, 2, '2022-12-12', 'ewgewg', 2, NULL, '2022-12-07'),
-(24, 2, 1, '2022-12-22', 'IM HUNGRY I NEED SNICKERS', 1, '2022-12-09', '2022-12-09'),
-(25, 2, 1, '2022-12-29', 'rrerbrtbrbb rgbbrtbrttb\r\nbtrbrtbrt', 2, NULL, '2022-12-09');
+INSERT INTO `leave_list` (`id`, `fid`, `leave_type_id`, `date`, `reason`, `status`, `date_created`, `date_approved`) VALUES
+(4, 2, 2, '2022-12-15', 'ghmghmg', 1, '2022-12-26 17:48:16', '2022-12-26 17:48:59');
 
 -- --------------------------------------------------------
 
@@ -220,11 +204,13 @@ INSERT INTO `leave_list` (`id`, `fid`, `leave_type_id`, `date`, `reason`, `statu
 -- Table structure for table `leave_type`
 --
 
-CREATE TABLE `leave_type` (
-  `id` int(30) NOT NULL,
+DROP TABLE IF EXISTS `leave_type`;
+CREATE TABLE IF NOT EXISTS `leave_type` (
+  `id` int(30) NOT NULL AUTO_INCREMENT,
   `leave_type` text NOT NULL,
-  `description` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `description` text NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `leave_type`
@@ -241,22 +227,24 @@ INSERT INTO `leave_type` (`id`, `leave_type`, `description`) VALUES
 -- Table structure for table `sem_tb`
 --
 
-CREATE TABLE `sem_tb` (
-  `sem_id` int(11) NOT NULL,
-  `sem_name` varchar(25) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+DROP TABLE IF EXISTS `sem_tb`;
+CREATE TABLE IF NOT EXISTS `sem_tb` (
+  `sem_id` int(11) NOT NULL AUTO_INCREMENT,
+  `sem_name` varchar(25) NOT NULL,
+  PRIMARY KEY (`sem_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `sem_tb`
 --
 
 INSERT INTO `sem_tb` (`sem_id`, `sem_name`) VALUES
-(1, 'SEMESTER 1'),
-(2, 'SEMESTER 2'),
-(3, 'SEMESTER 3'),
-(4, 'SEMESTER 4'),
-(5, 'SEMESTER 5'),
-(6, 'SEMESTER 6');
+(1, 'Semester 1'),
+(2, 'Semester 2'),
+(3, 'Semester 3'),
+(4, 'Semester 4'),
+(5, 'Semester 5'),
+(6, 'Semester 6');
 
 -- --------------------------------------------------------
 
@@ -264,12 +252,16 @@ INSERT INTO `sem_tb` (`sem_id`, `sem_name`) VALUES
 -- Table structure for table `sub_tb`
 --
 
-CREATE TABLE `sub_tb` (
-  `sub_id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `sub_tb`;
+CREATE TABLE IF NOT EXISTS `sub_tb` (
+  `sub_id` int(11) NOT NULL AUTO_INCREMENT,
   `sub_name` varchar(100) NOT NULL,
   `depid` int(11) NOT NULL,
-  `sem_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `sem_id` int(11) NOT NULL,
+  PRIMARY KEY (`sub_id`),
+  KEY `depid` (`depid`),
+  KEY `sem_id` (`sem_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `sub_tb`
@@ -285,171 +277,24 @@ INSERT INTO `sub_tb` (`sub_id`, `sub_name`, `depid`, `sem_id`) VALUES
 -- Table structure for table `x_table_tb`
 --
 
-CREATE TABLE `x_table_tb` (
-  `table_id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `x_table_tb`;
+CREATE TABLE IF NOT EXISTS `x_table_tb` (
+  `table_id` int(11) NOT NULL AUTO_INCREMENT,
   `sub_id` int(11) NOT NULL,
   `exam_id` int(11) NOT NULL,
   `x_date` date NOT NULL,
-  `time` time NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `time` time NOT NULL,
+  PRIMARY KEY (`table_id`),
+  KEY `sub` (`sub_id`) USING BTREE,
+  KEY `Foreign key` (`exam_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `x_table_tb`
 --
 
 INSERT INTO `x_table_tb` (`table_id`, `sub_id`, `exam_id`, `x_date`, `time`) VALUES
-(13, 9, 13, '2022-12-04', '16:48:40'),
-(15, 9, 13, '2022-11-06', '07:18:00'),
-(16, 8, 16, '2022-11-11', '10:03:00'),
-(17, 9, 17, '2022-11-16', '15:28:00'),
-(18, 9, 19, '2022-11-25', '18:29:00'),
-(19, 8, 20, '2022-11-10', '15:35:00');
-
---
--- Indexes for dumped tables
---
-
---
--- Indexes for table `alloc_tb`
---
-ALTER TABLE `alloc_tb`
-  ADD PRIMARY KEY (`al_id`),
-  ADD KEY `class` (`class_id`),
-  ADD KEY `table_id` (`table_id`),
-  ADD KEY `fac` (`fid`);
-
---
--- Indexes for table `classroom_tb`
---
-ALTER TABLE `classroom_tb`
-  ADD PRIMARY KEY (`class_id`);
-
---
--- Indexes for table `dep_tb`
---
-ALTER TABLE `dep_tb`
-  ADD PRIMARY KEY (`depid`);
-
---
--- Indexes for table `desig_tb`
---
-ALTER TABLE `desig_tb`
-  ADD PRIMARY KEY (`des_id`);
-
---
--- Indexes for table `exam_tb`
---
-ALTER TABLE `exam_tb`
-  ADD PRIMARY KEY (`exam_id`),
-  ADD KEY `semID` (`sem_id`);
-
---
--- Indexes for table `fac_tb`
---
-ALTER TABLE `fac_tb`
-  ADD PRIMARY KEY (`fid`),
-  ADD KEY `des_id` (`des_id`),
-  ADD KEY `dep` (`depid`);
-
---
--- Indexes for table `leave_list`
---
-ALTER TABLE `leave_list`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `fac_id` (`fid`),
-  ADD KEY `leave_type` (`leave_type_id`);
-
---
--- Indexes for table `leave_type`
---
-ALTER TABLE `leave_type`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `sem_tb`
---
-ALTER TABLE `sem_tb`
-  ADD PRIMARY KEY (`sem_id`);
-
---
--- Indexes for table `sub_tb`
---
-ALTER TABLE `sub_tb`
-  ADD PRIMARY KEY (`sub_id`),
-  ADD KEY `depid` (`depid`),
-  ADD KEY `sem_id` (`sem_id`);
-
---
--- Indexes for table `x_table_tb`
---
-ALTER TABLE `x_table_tb`
-  ADD PRIMARY KEY (`table_id`),
-  ADD KEY `sub` (`sub_id`) USING BTREE,
-  ADD KEY `Foreign key` (`exam_id`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `alloc_tb`
---
-ALTER TABLE `alloc_tb`
-  MODIFY `al_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
-
---
--- AUTO_INCREMENT for table `classroom_tb`
---
-ALTER TABLE `classroom_tb`
-  MODIFY `class_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT for table `dep_tb`
---
-ALTER TABLE `dep_tb`
-  MODIFY `depid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
-
---
--- AUTO_INCREMENT for table `exam_tb`
---
-ALTER TABLE `exam_tb`
-  MODIFY `exam_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
-
---
--- AUTO_INCREMENT for table `fac_tb`
---
-ALTER TABLE `fac_tb`
-  MODIFY `fid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
-
---
--- AUTO_INCREMENT for table `leave_list`
---
-ALTER TABLE `leave_list`
-  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
-
---
--- AUTO_INCREMENT for table `leave_type`
---
-ALTER TABLE `leave_type`
-  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
---
--- AUTO_INCREMENT for table `sem_tb`
---
-ALTER TABLE `sem_tb`
-  MODIFY `sem_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
---
--- AUTO_INCREMENT for table `sub_tb`
---
-ALTER TABLE `sub_tb`
-  MODIFY `sub_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
-
---
--- AUTO_INCREMENT for table `x_table_tb`
---
-ALTER TABLE `x_table_tb`
-  MODIFY `table_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+(7, 8, 52, '2022-12-10', '17:18:00');
 
 --
 -- Constraints for dumped tables
@@ -473,28 +318,28 @@ ALTER TABLE `exam_tb`
 -- Constraints for table `fac_tb`
 --
 ALTER TABLE `fac_tb`
-  ADD CONSTRAINT `dep` FOREIGN KEY (`depid`) REFERENCES `dep_tb` (`depid`),
-  ADD CONSTRAINT `fac_tb_ibfk_1` FOREIGN KEY (`des_id`) REFERENCES `desig_tb` (`des_id`);
+  ADD CONSTRAINT `Department` FOREIGN KEY (`depid`) REFERENCES `dep_tb` (`depid`),
+  ADD CONSTRAINT `Designation` FOREIGN KEY (`des_id`) REFERENCES `desig_tb` (`des_id`);
 
 --
 -- Constraints for table `leave_list`
 --
 ALTER TABLE `leave_list`
-  ADD CONSTRAINT `fac_id` FOREIGN KEY (`fid`) REFERENCES `fac_tb` (`fid`),
-  ADD CONSTRAINT `leave_type` FOREIGN KEY (`leave_type_id`) REFERENCES `leave_type` (`id`);
+  ADD CONSTRAINT `F` FOREIGN KEY (`fid`) REFERENCES `fac_tb` (`fid`),
+  ADD CONSTRAINT `L` FOREIGN KEY (`leave_type_id`) REFERENCES `leave_type` (`id`);
 
 --
 -- Constraints for table `sub_tb`
 --
 ALTER TABLE `sub_tb`
-  ADD CONSTRAINT `depid` FOREIGN KEY (`depid`) REFERENCES `dep_tb` (`depid`),
-  ADD CONSTRAINT `sem_id` FOREIGN KEY (`sem_id`) REFERENCES `sem_tb` (`sem_id`);
+  ADD CONSTRAINT `dep` FOREIGN KEY (`depid`) REFERENCES `dep_tb` (`depid`),
+  ADD CONSTRAINT `sem` FOREIGN KEY (`sem_id`) REFERENCES `sem_tb` (`sem_id`);
 
 --
 -- Constraints for table `x_table_tb`
 --
 ALTER TABLE `x_table_tb`
-  ADD CONSTRAINT `Foreign key` FOREIGN KEY (`exam_id`) REFERENCES `exam_tb` (`exam_id`),
+  ADD CONSTRAINT `exam` FOREIGN KEY (`exam_id`) REFERENCES `exam_tb` (`exam_id`),
   ADD CONSTRAINT `sub` FOREIGN KEY (`sub_id`) REFERENCES `sub_tb` (`sub_id`);
 COMMIT;
 
