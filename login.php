@@ -172,11 +172,11 @@ if(isset($_REQUEST['up'])){
                 $result = mysqli_query($conn, $query);
                   if($result)
                     {
-                      echo "Data Inserted";
+                      echo "alert('Registered !');"
                     }
                    else
                      {
-                       echo "Data not Inserted";
+                       echo "alert('Error !');";
                    }
             }
           }
