@@ -168,6 +168,7 @@ if(isset($_REQUEST['up'])){
         include 'server.php';
       
         $query = "INSERT INTO fac_tb (phone,des_id,depid,fname,uname,passw,status,duty_count) VALUES($phone,'$des','$dep','$fname','$uname','$pass',1,0)";
+        echo $query;
         
                 $result = mysqli_query($conn, $query);
                   if($result)
