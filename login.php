@@ -166,19 +166,16 @@ if(isset($_REQUEST['up'])){
         $uname = $_POST['uname'];
         $pass = $_POST['pass'];
         include 'server.php';
-      
-        $query = "INSERT INTO fac_tb (phone,des_id,depid,fname,uname,passw,status,duty_count) VALUES($phone,'$des','$dep','$fname','$uname','$pass',1,0)";
-        
+        $query = "INSERT INTO fac_tb (phone,des_id,depid,fname,uname,passw,status) VALUES($phone,'$des','$dep','$fname','$uname','$pass',1)";
                 $result = mysqli_query($conn, $query);
                   if($result)
                     {
-                      echo "Data Inserted";
+                      echo "<script>alert('Registered !')</script>";
                     }
                    else
                      {
-                       echo "Data not Inserted";
+                       echo "<script>alert('Registration Failed !')</script>";
                    }
             }
           }
-    
 ?>
