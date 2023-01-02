@@ -235,6 +235,12 @@ $uname = $_SESSION['uname'];
       include '../server.php';
       $sql_query = "SELECT * FROM sub_tb, dep_tb, x_table_tb, exam_tb WHERE sub_tb.sub_id = x_table_tb.sub_id AND x_table_tb.exam_id = exam_tb.exam_id AND dep_tb.depid = sub_tb.depid AND exam_tb.exam_id = '$exam_id'";
 			$resultset = mysqli_query($conn, $sql_query) or die("database error:". mysqli_error($conn));
+      if($result->num_rows == 0){
+        echo "<tbody><tr>";
+        echo "<td colspan='5'>No Timetable Found</td>";
+        echo "</tr></tbody>";
+      }
+      else{
 			while( $row = mysqli_fetch_assoc($resultset) ) {
 			?>
 			   <tr id="<?php echo $row ['table_id']; ?>">
@@ -243,7 +249,8 @@ $uname = $_SESSION['uname'];
 			   <td><?php echo $row ['dname']; ?></td>
 			   <td><?php echo $row ['sub_name']; ?></td>
 			   </tr>
-			<?php } ?>
+			<?php }
+      } ?>
 		</tbody>
 		</table>
     </div>
