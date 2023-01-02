@@ -167,7 +167,7 @@ if(isset($_REQUEST['up'])){
         $pass = $_POST['pass'];
         include 'server.php';
       
-        $query = "INSERT INTO fac_tb (phone,des_id,depid,fname,uname,passw,status) VALUES($phone,'$des','$dep','$fname','$uname','$pass',1,0)";
+        $query = "INSERT INTO fac_tb (phone,des_id,depid,fname,uname,passw,status) VALUES($phone,'$des','$dep','$fname','$uname','$pass',1)";
         echo $query;
         
                 $result = mysqli_query($conn, $query);
