@@ -201,7 +201,7 @@ $uname = $_SESSION['uname'];
     </div>
   </div>
 
-  <div class="d-flex flex-column flex-grow-1" style="overflow: auto; padding : 30px;">
+  <div class="d-flex flex-column flex-grow-1" style="overflow: auto; padding : 10px;">
   <?php
   include '../server.php';
   $fetch_exam = "SELECT * FROM exam_tb WHERE status='1'";
