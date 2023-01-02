@@ -170,11 +170,11 @@ if(isset($_REQUEST['up'])){
                 $result = mysqli_query($conn, $query);
                   if($result)
                     {
-                      echo "script>alert('Registered !')</script>"
+                      echo "script>alert('Registered !')</script>";
                     }
                    else
                      {
-                       echo "script>alert('Registration Failed !')</script>"
+                       echo "script>alert('Registration Failed !')</script>";
                    }
             }
           }
