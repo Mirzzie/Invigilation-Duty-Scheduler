@@ -211,14 +211,13 @@ $uname = $_SESSION['uname'];
       $exam_id = $row["exam_id"];
       $exam_title= $row["exam_name"];
 ?>
-<div class="accordion" id="accordionPanelsStayOpenExample">
-  <div class="accordion-item">
-    <h2 class="accordion-header" id="panelsStayOpen-headingOne">
-      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
-        <?php echo $exam_title; ?>
+<div class="accordion-item">
+    <h2 class="accordion-header" id="headingTwo">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+      <?php echo $exam_title; ?>
       </button>
     </h2>
-    <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
+    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
       <div class="accordion-body">
       <div class="card">
       <table id="data_table" class="table table-bordered border-dark">
@@ -264,3 +263,4 @@ $uname = $_SESSION['uname'];
       <script src="../assets/js/sidebars.js"></script>
   </body>
 </html>
+
