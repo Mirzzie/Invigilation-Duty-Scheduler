@@ -214,8 +214,14 @@ $uname = $_SESSION['uname'];
         LEFT JOIN classroom_tb
         ON classroom_tb.class_id = alloc_tb.class_id";
 			$resultset = mysqli_query($conn, $sql_query) or die("database error:". mysqli_error($conn));
-			while( $row = mysqli_fetch_assoc($resultset) ) {
-			?>
+      if($resultset->num_rows == 0){
+        echo "<tbody><tr>";
+        echo "<td colspan='5'>No Allocations Found</td>";
+        echo "</tr></tbody>";
+      }
+      else{
+			 while( $row = mysqli_fetch_assoc($resultset) ) {
+			 ?>
 			   <tr id="<?php echo $row ['al_id']; ?>">
                 <td><?php echo $row ['al_id']; ?></td>
                 <td><?php echo $row ['x_date']; ?></td>
@@ -226,11 +232,25 @@ $uname = $_SESSION['uname'];
                 <td><form class="form-horizontal" method="post"action=''>
                         <input type="hidden" name="al_id" value="<?php echo $row['al_id']; ?>">
                         <input type='submit' class='btn btn-danger' name='delete' value='Delete'>
+                        <input type='submit' class='btn btn-outline-primary' name='Re-allocate' value='Change'>
                         </form></td>
 			   </tr>
             </tr>
-            <?php } ?>
+            <?php }} ?>
       <?php
+      if(isset($_POST['Re-allocate'])){
+        $al_id = $_POST['al_id'];
+        $delete = "DELETE FROM alloc_tb WHERE al_id='$al_id'";
+        $result = mysqli_query($conn,$delete);
+        if($result){
+          echo "<script>alert('Deleted Successfully')</script>";
+          echo "<script>window.location.href=''</script>";
+        }
+        else{
+          echo "<script>alert('Failed to Delete')</script>";
+          echo "<script>window.location.href=''</script>";
+        }
+      }
 
       if(isset($_POST['delete'])){
         $al_id = $_POST['al_id'];
