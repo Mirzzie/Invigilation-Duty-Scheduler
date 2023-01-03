@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Dec 30, 2022 at 10:03 AM
+-- Generation Time: Jan 03, 2023 at 08:11 AM
 -- Server version: 5.7.40
 -- PHP Version: 8.0.26
 
@@ -37,7 +37,14 @@ CREATE TABLE IF NOT EXISTS `alloc_tb` (
   KEY `class` (`class_id`),
   KEY `table_id` (`table_id`),
   KEY `fac` (`fid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `alloc_tb`
+--
+
+INSERT INTO `alloc_tb` (`al_id`, `table_id`, `class_id`, `fid`) VALUES
+(1, 7, 1, 2);
 
 -- --------------------------------------------------------
 
@@ -156,7 +163,7 @@ CREATE TABLE IF NOT EXISTS `fac_tb` (
   PRIMARY KEY (`fid`),
   KEY `des_id` (`des_id`),
   KEY `dep` (`depid`)
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `fac_tb`
@@ -165,10 +172,8 @@ CREATE TABLE IF NOT EXISTS `fac_tb` (
 INSERT INTO `fac_tb` (`fid`, `fname`, `phone`, `des_id`, `depid`, `uname`, `passw`, `status`) VALUES
 (2, 'Roshna C P', 963852743, 2, 1, 'roshna', 'rosh', 1),
 (16, 'Reseena Mol N A', 123456789, 1, 1, 'abcd@gmail.com', 'abcd', 1),
-(19, 'abcd', 123456789, 2, 2, 'efgh', 'efgh', 0),
-(20, 'abcd', 123456789, 2, 2, 'efgh', 'efgh', 0),
-(21, 'miyami', 9207282703, 1, 2, 'memo', '1230', 0),
-(22, 'abcd', 9846291161, 2, 4, 'aaaa', 'Aa111111111', 0);
+(24, 'Shifaz Khan', 9945689786, 2, 1, 'shifu', 'Shifu123#', 1),
+(25, 'Sadiya Mol PA', 9863245876, 2, 1, 'Sadiya', 'Sadya123#', 1);
 
 -- --------------------------------------------------------
 
