@@ -245,11 +245,11 @@ if(isset($_REQUEST['reallocate'])){
     $result = $conn->query($realoc);
     if($result){
         echo "<script>alert('Updated Successfully!')</script>";
-        echo "<script>window.location.href='fac_schedule.php'</script>";
+        // echo "<script>window.location.href='fac_schedule.php'</script>";
     }
     else{
         echo "<script>alert('Failed to Update!')</script>";
-        echo "<script>window.location.href='fac_schedule.php'</script>";
+        // echo "<script>window.location.href='fac_schedule.php'</script>";
     }
 }
 ?>
