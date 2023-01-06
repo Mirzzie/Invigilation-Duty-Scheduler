@@ -240,7 +240,7 @@ $uname = $_SESSION['uname'];
       <?php
       if(isset($_POST['Re-allocate'])){
         $al_id = $_POST['al_id'];
-        echo "<script>window.location.href='re_allocate.php?al_id_id=$al_id'</script>";
+        echo "<script>window.location.href='re_allocate.php?al_id=$al_id'</script>";
       }
 
       if(isset($_POST['delete'])){
