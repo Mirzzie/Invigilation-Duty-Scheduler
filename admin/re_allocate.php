@@ -241,15 +241,14 @@ if(isset($_REQUEST['reallocate'])){
     $fid=$_POST['fid'];
     $class_id=$_POST['class_id'];
     $realoc = "UPDATE alloc_tb SET fid='$fid',class_id='$class_id' WHERE al_id='$al_id'";
-    echo $realoc;
     $result = $conn->query($realoc);
     if($result){
         echo "<script>alert('Updated Successfully!')</script>";
-        // echo "<script>window.location.href='fac_schedule.php'</script>";
+        echo "<script>window.location.href='fac_schedule.php'</script>";
     }
     else{
         echo "<script>alert('Failed to Update!')</script>";
-        // echo "<script>window.location.href='fac_schedule.php'</script>";
+        echo "<script>window.location.href='fac_schedule.php'</script>";
     }
 }
 ?>
