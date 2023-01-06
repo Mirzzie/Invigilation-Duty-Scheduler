@@ -254,7 +254,16 @@ $uname = $_SESSION['uname'];
 
       if(isset($_POST['delete'])){
         $al_id = $_POST['al_id'];
-        echo "<script>window.location.href='allocate.php?al_id_id=$al_id'</script>";
+        $delete = "DELETE FROM alloc_tb WHERE al_id='$al_id'";
+        $result = mysqli_query($conn,$delete);
+        if($result){
+          echo "<script>alert('Deleted Successfully')</script>";
+          echo "<script>window.location.href=''</script>";
+        }
+        else{
+          echo "<script>alert('Failed to Delete')</script>";
+          echo "<script>window.location.href=''</script>";
+        }
       }
 ?>
 		</tbody>
