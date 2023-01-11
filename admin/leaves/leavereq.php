@@ -129,7 +129,6 @@ $uname = $_SESSION['uname'];
   </head>
   <body>
 <main class="d-flex flex-nowrap" style="height: 990px;">
-  <h1 class="visually-hidden">Sidebars examples</h1>
 
   <div class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark" style="width: 280px;">
     <a href="" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
@@ -157,34 +156,32 @@ $uname = $_SESSION['uname'];
         </a>
       </li>
       <li>
-        <a href="leavereq.php" class="nav-link active" aria-current="page" >
+        <a href="leavereq.php"  class="nav-link active" aria-current="page">
           <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#grid"/></svg>
           Leave Requests
         </a>
       </li>
       <li>
-        <a href="../users.php" class="nav-link text-white">
+        <a href="../users.php"  class="nav-link text-white">
           <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#people-circle"/></svg>
           Users
         </a>
       </li>
+     
     </ul>
     <hr>
 
     <div class="dropdown">
-      <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+      <a href="" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
         <strong><?php echo $uname;?></strong>
       </a>
       <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
         <li><a class="dropdown-item" href="../../logout.php">Sign out</a></li>
       </ul>
     </div>
-  </div>
+    </div>
 
   <div class="d-flex flex-column flex-grow-1" style="padding-top : 30px;">
-
-
-
   <div class="card">
   <h5 class="card-header">LEAVE REQUESTS</h5>
   <table id="data_table" class="table table-bordered border-dark">
@@ -263,9 +260,11 @@ $uname = $_SESSION['uname'];
         }
       }
 ?>
+  </div>
+
  <script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha384-GNFwBvfVxBkLMJpYMOABq3c+d3KnQxudP/mGPkzpZSTYykLBNsZEnG2D9G/X/+7D" crossorigin="anonymous" async></script>
 </main>
-<script src="../assets/js/bootstrap.bundle.min.js"></script>
-  <script src="../assets/js/sidebars.js"></script>
-  </body>
+<script src="../../assets/js/bootstrap.bundle.min.js"></script>
+ <script src="../../assets/js/sidebars.js"></script>
+</body>
 </html>
