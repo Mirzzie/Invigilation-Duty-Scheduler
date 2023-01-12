@@ -216,7 +216,7 @@ $uname = $_SESSION['uname'];
         </a>
       </li>
       <li>
-        <a href="add_schedview.php" class="nav-link active" aria-current="page">                   
+        <a href="add_schedview.php" class="nav-link active" aria-current="page">
           <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#table"/></svg>
           Create Schedule
         </a>
@@ -255,11 +255,10 @@ $uname = $_SESSION['uname'];
 
 <div class="d-flex flex-column flex-grow-1" style="padding : 30px;">
 
-<div class="card">      	
+<div class="card">
   <h5 class="card-header">
     ALLOCATION
   </h5>
-  
   <form method="POST" action="" style= "padding: 30px; width: 880px;">
   <label class="col-sm-2 col-form-label">Faculty</label>
         <table>

@@ -10,7 +10,7 @@ $uname = $_SESSION['uname'];
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.101.0">
-    <title>LEAVE REQUESTS</title>
+    <title>Sidebars · Bootstrap v5.2</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@1,300&display=swap" rel="stylesheet">
@@ -18,7 +18,7 @@ $uname = $_SESSION['uname'];
 
 
 
-<link href="../../assets/css/bootstrap.min.css" rel="stylesheet">
+<link href="../assets/css/bootstrap.min.css" rel="stylesheet">
 
     <style>
       .bd-placeholder-img {
@@ -125,11 +125,12 @@ $uname = $_SESSION['uname'];
 
     
     <!-- Custom styles for this template -->
-    <link href="../../assets/css/sidebars.css" rel="stylesheet">
+    <link href="../assets/css/sidebars.css" rel="stylesheet">
   </head>
   <body>
-<main class="d-flex flex-nowrap" style="height: 990px;">
 
+<main class="d-flex flex-nowrap" style="height: 990px;">
+  <h1 class="visually-hidden">ADMIN DASHBOARD</h1>
   <div class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark" style="width: 280px;">
     <a href="" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
       <!-- <svg class="bi pe-none me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg> -->
@@ -138,133 +139,77 @@ $uname = $_SESSION['uname'];
     <hr>
     <ul class="nav nav-pills flex-column mb-auto">
       <li class="nav-item">
-        <a href="../admin_dash.php" class="nav-link text-white">
+        <a href="admin_dash.php" class="nav-link text-white">
           <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#home"/></svg>
           Home
         </a>
       </li>
       <li>
-      <a href="../fac_schedule.php" class="nav-link text-white">
+      <a href="fac_schedule.php" class="nav-link text-white">
           <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#speedometer2"/></svg>
           Faculty Schedule
         </a>
       </li>
       <li>
-        <a href="../exam_table.php" class="nav-link text-white" >
+        <a href="exam_table.php"class="nav-link active" aria-current="page" >
           <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#table"/></svg>
           Exam Schedule
         </a>
       </li>
       <li>
-        <a href="leavereq.php"  class="nav-link active" aria-current="page">
+        <a href="add_exam.php" class="nav-link text-white">                   
+          <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#table"/></svg>
+          Add Exam
+        </a>
+      </li>
+      <li>
+        <a href="add_dep.php" class="nav-link text-white" >
+          <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#table"/></svg>
+          Add Department
+        </a>
+      </li>
+
+      <li>
+        <a href="add_sub.php" class="nav-link text-white">
+          <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#table"/></svg>
+          Add Subject
+        </a>
+      </li>
+
+      <li>
+        <a href="./leaves/leavereq.php" class="nav-link text-white">
           <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#grid"/></svg>
           Leave Requests
         </a>
       </li>
       <li>
-        <a href="../users.php"  class="nav-link text-white">
+        <a href="users.php" class="nav-link text-white">
           <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#people-circle"/></svg>
           Users
         </a>
       </li>
-     
     </ul>
     <hr>
-
     <div class="dropdown">
-      <a href="" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+      <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
         <strong><?php echo $uname;?></strong>
       </a>
       <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
-        <li><a class="dropdown-item" href="../../logout.php">Sign out</a></li>
+        <li><hr class="dropdown-divider"></li>
+        <li><a class="dropdown-item" href="../logout.php">Sign out</a></li>
       </ul>
     </div>
-    </div>
-
-  <div class="d-flex flex-column flex-grow-1" style="padding-top : 30px;">
-  <div class="card">
-  <h5 class="card-header">LEAVE REQUESTS</h5>
-  <table id="data_table" class="table table-bordered border-dark">
-		<thead>
-			<tr>
-				<th>Name</th>
-				<th>Department</th>
-				<th>Date of Application</th>
-        <th>Leave Date</th>
-				<th>Type</th>
-        <th>Reason</th>
-        <th>Action</th>
-			</tr>
-		</thead>
-		<tbody>
-        <?php
-        include '../../server.php';
-			$sql_query = "SELECT * FROM fac_tb,dep_tb,leave_type,leave_list WHERE leave_type.id=leave_list.leave_type_id AND fac_tb.depid= dep_tb.depid AND fac_tb.fid=leave_list.fid AND leave_list.status=0";
-			$resultset = mysqli_query($conn, $sql_query) or die("database error:". mysqli_error($conn));
-      if(mysqli_num_rows($resultset) == 0) {
-        echo "<tr><td colspan='7'>No Record Found</td></tr>";
-      }
-      else{
-			while( $row = mysqli_fetch_assoc($resultset) ) {
-			    echo "<td>".$row ['fname']."</td>";
-          echo "<td>".$row ['dname']."</td>";
-          echo "<td>".$row ['date_created']."</td>";
-          echo "<td>".$row ['date']."</td>";
-          echo "<td>".$row ['leave_type']."</td>";
-          echo "<td>".$row ['reason']."</td>";
-          ?>
-          <td><form class='form-horizontal' method='post' action=''>
-                <input type='hidden' name='leave_id' value='<?php echo $row['id']; ?>'>
-                <input type='submit' class='btn btn-success' name='approve' value='Approve'>
-                <input type='submit' class='btn btn-danger' name='reject' value='Reject'>
-            </form></td></tr>
-			<?php
-      }
-    }
-      ?>
-		</tbody>
-		</table>
-  </div>
-</div>
-
-<?php
-
-      if(isset($_POST['approve'])){
-        $leave_id = $_POST['leave_id'];
-        $update= "UPDATE leave_list SET date_approved=current_timestamp() WHERE date_approved IS NULL AND id=$leave_id";
-        $result1=mysqli_query($conn,$update);
-        if($result1){
-        $update1 = "UPDATE leave_list SET status='1' WHERE id=$leave_id";
-        $result = mysqli_query($conn,$update1);
-        if($result){
-          echo "<script>alert('Leave APPROVED !')</script>";
-          echo "<script>window.location.href=''</script>";
-        }
-      }
-        else{
-          echo "<script>alert('Failed to APPROVE !')</script>";
-          echo "<script>window.location.href=''</script>";
-        }
-      }
-      if(isset($_POST['reject'])){
-        $leave_id = $_POST['leave_id'];
-        $update = "UPDATE leave_list SET status='2' WHERE id=$leave_id";
-        $result = mysqli_query($conn,$update);
-        if($result){
-          echo "<script>alert('Leave REJECTED !')</script>";
-          echo "<script>window.location.href=''</script>";
-        }
-        else{
-          echo "<script>alert('Failed to REJECT !')</script>";
-          echo "<script>window.location.href=''</script>";
-        }
-      }
-?>
   </div>
 
- <script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha384-GNFwBvfVxBkLMJpYMOABq3c+d3KnQxudP/mGPkzpZSTYykLBNsZEnG2D9G/X/+7D" crossorigin="anonymous" async></script>
+  <div class="d-flex flex-column flex-grow-1" style="overflow: auto; padding : 10px;">
+  
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha384-GNFwBvfVxBkLMJpYMOABq3c+d3KnQxudP/mGPkzpZSTYykLBNsZEnG2D9G/X/+7D" crossorigin="anonymous" async></script>
 </main>
-<script src="../../assets/js/bootstrap.bundle.min.js"></script>
- <script src="../../assets/js/sidebars.js"></script>
-</body>
+
+
+    <script src="../assets/js/bootstrap.bundle.min.js"></script>
+
+      <script src="../assets/js/sidebars.js"></script>
+  </body>
 </html>
