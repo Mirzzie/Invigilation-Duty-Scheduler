@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Jan 03, 2023 at 08:11 AM
+-- Generation Time: Jan 13, 2023 at 04:19 PM
 -- Server version: 5.7.40
 -- PHP Version: 8.0.26
 
@@ -37,14 +37,14 @@ CREATE TABLE IF NOT EXISTS `alloc_tb` (
   KEY `class` (`class_id`),
   KEY `table_id` (`table_id`),
   KEY `fac` (`fid`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `alloc_tb`
 --
 
 INSERT INTO `alloc_tb` (`al_id`, `table_id`, `class_id`, `fid`) VALUES
-(1, 7, 1, 2);
+(12, 8, 2, 16);
 
 -- --------------------------------------------------------
 
@@ -130,7 +130,7 @@ CREATE TABLE IF NOT EXISTS `exam_tb` (
   `status` int(11) NOT NULL,
   PRIMARY KEY (`exam_id`),
   KEY `semID` (`sem_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=53 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=55 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `exam_tb`
@@ -142,7 +142,9 @@ INSERT INTO `exam_tb` (`exam_id`, `exam_name`, `start_date`, `end_date`, `sem_id
 (46, 'BCA CBCS REGULA EXAM NOV 22', '2022-12-12', '2023-01-05', 5, 1),
 (50, 'abc', '2022-12-18', '2022-12-22', 2, 1),
 (51, 'nami', '2023-01-04', '2022-12-19', 2, 1),
-(52, 'mirzzie', '2022-12-18', '2022-12-23', 3, 1);
+(52, 'mirzzie', '2022-12-18', '2022-12-23', 3, 1),
+(53, 'bvv', '2023-01-18', '2023-01-21', 2, 1),
+(54, 'BCA CBCS REGULA EXAM NOV 23', '2023-01-28', '2023-07-22', 5, 1);
 
 -- --------------------------------------------------------
 
@@ -163,7 +165,7 @@ CREATE TABLE IF NOT EXISTS `fac_tb` (
   PRIMARY KEY (`fid`),
   KEY `des_id` (`des_id`),
   KEY `dep` (`depid`)
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `fac_tb`
@@ -173,7 +175,8 @@ INSERT INTO `fac_tb` (`fid`, `fname`, `phone`, `des_id`, `depid`, `uname`, `pass
 (2, 'Roshna C P', 963852743, 2, 1, 'roshna', 'rosh', 1),
 (16, 'Reseena Mol N A', 123456789, 1, 1, 'abcd@gmail.com', 'abcd', 1),
 (24, 'Shifaz Khan', 9945689786, 2, 1, 'shifu', 'Shifu123#', 1),
-(25, 'Sadiya Mol PA', 9863245876, 2, 1, 'Sadiya', 'Sadya123#', 1);
+(25, 'Sadiya Mol PA', 9863245876, 2, 1, 'Sadiya', 'Sadya123#', 1),
+(26, 'BOSS', 9956854231, 1, 2, 'boss', 'Ae1245698#', 1);
 
 -- --------------------------------------------------------
 
@@ -266,15 +269,37 @@ CREATE TABLE IF NOT EXISTS `sub_tb` (
   PRIMARY KEY (`sub_id`),
   KEY `depid` (`depid`),
   KEY `sem_id` (`sem_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `sub_tb`
 --
 
 INSERT INTO `sub_tb` (`sub_id`, `sub_name`, `depid`, `sem_id`) VALUES
-(8, 'JAVA PROGRAMMING', 1, 4),
-(9, 'STATISTICS', 3, 2);
+(1, 'ENGLISH-I', 1, 1),
+(2, 'MATHEMATICS', 1, 1),
+(3, 'BASIC STATISTICS', 1, 1),
+(4, 'CA1CRT01-COMPUTER FUNDAMENTALS AND DIGITAL PRINCIPLES', 1, 1),
+(5, 'CA1CRT01-METHODOLOGY OF PROGRAMMING AND C LANGUAGE', 1, 1),
+(6, 'ENGLISH-II', 1, 1),
+(8, 'DISCRETE MATHEMATICS', 1, 1),
+(9, 'CA2CRT03-DATABASE MANAGEMENT SYSTEMS', 1, 1),
+(10, 'CA2CRT04-COMPUTER ORGANIZATION AND ARCHITECTURE', 1, 1),
+(11, 'CA2CRT05-OBJECT ORIENTED PROGRAMMING USING C++', 1, 1),
+(13, 'ST3CMT32-ADVANCED SSSTATISTICAL METHODS', 1, 1),
+(14, 'CA3CRT06-COMPUTERR GRAPHICS', 1, 1),
+(15, 'CA3CRT07-MICROPROCESSOR AND PC HARDWARE', 1, 1),
+(16, 'CA3CRT08-OPERATING SYSTEMS', 1, 1),
+(17, 'CA3CRT09-DATA STUCTURE USING C++', 1, 1),
+(19, 'MM4CMT03-OPERATIONAL RESEARCH', 1, 1),
+(20, 'CA4CRT10-DEIGN AND ANALYSIS OF ALGORITHMS', 1, 1),
+(21, 'CA4CRT11-SYSTEM ANALYSIS & SOFTWARE ENGINEERING', 1, 1),
+(22, 'CA4CRT12-LINUX ADMINISTRATION', 1, 1),
+(23, 'CA4CRT13-WEB PROGRAMMING USING PHP', 1, 1),
+(25, 'CS5CRT12-COMPUTER NETWORKS', 1, 1),
+(26, 'CS5CRT13-IT AND ENVIRONMENT', 1, 1),
+(27, 'CS5CRT14-JAVA PROGRAMMING USING LINUX', 1, 1),
+(28, 'CO5OPT03-FUNDAMENTALS OF ACCOUNTING', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -290,16 +315,17 @@ CREATE TABLE IF NOT EXISTS `x_table_tb` (
   `x_date` date NOT NULL,
   `time` time NOT NULL,
   PRIMARY KEY (`table_id`),
-  KEY `sub` (`sub_id`) USING BTREE,
-  KEY `Foreign key` (`exam_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4;
+  KEY `Foreign key` (`exam_id`),
+  KEY `sub` (`sub_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `x_table_tb`
 --
 
 INSERT INTO `x_table_tb` (`table_id`, `sub_id`, `exam_id`, `x_date`, `time`) VALUES
-(7, 8, 52, '2022-12-10', '17:18:00');
+(7, 8, 52, '2022-12-10', '17:18:00'),
+(8, 9, 53, '2023-01-22', '09:36:00');
 
 --
 -- Constraints for dumped tables
