@@ -134,6 +134,8 @@ $uname= $_SESSION['uname'];
   </head>
   <body>
 <main class="d-flex flex-nowrap" style="height: 990px;">
+  <h1 class="visually-hidden"></h1>
+
   <div class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark" style="width: 280px;">
     <a href="" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
       <span class="fs-4">Admin Dashboard</span>
@@ -193,10 +195,11 @@ $uname= $_SESSION['uname'];
     <hr>
 
     <div class="dropdown">
-      <a href="" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+      <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
         <strong><?php echo $uname;?></strong>
       </a>
       <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
+        <li><hr class="dropdown-divider"></li>
         <li><a class="dropdown-item" href="../logout.php">Sign out</a></li>
       </ul>
     </div>
@@ -254,6 +257,7 @@ $uname= $_SESSION['uname'];
   <h5 class="card-header">EDIT EXAM DETAILS</h5>
 
   <form method="POST" action="" style= "padding: 30px; width: 880px;">
+  
   <label for="inputPassword" class="col-sm-2 col-form-label">Name of the Examination</label>
         <table>
       <tr>
