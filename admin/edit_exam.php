@@ -6,7 +6,7 @@ $uname = $_SESSION['uname'];
 <html lang="en" dir="ltr">
   <head>
     <meta charset="UTF-8">
-    <title>RE-SCHEDULE</title>
+    <title> Drop Down Sidebar Menu | CodingLab </title>
     <link rel="stylesheet" href="../assets/css/styleo.css">
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     <link href="../assets/css/bootstrap.min.css" rel="stylesheet">
@@ -115,75 +115,103 @@ $uname = $_SESSION['uname'];
       <i class='bx bx-menu' ></i>
       <span class="text">Menu</span>
     </div>
-<div class="d-flex flex-column flex-grow-1" style="padding : 30px;">
-
-<div class="card">
-  <h5 class="card-header">
-    RE-SCHEDULE
-  </h5>
-  <form method="POST" action="" style= "padding: 30px; width: 880px;">
-  <label class="col-sm-2 col-form-label">Faculty</label>
-        <table>
-      <tr>
-      <select name="fid" class="form-select" aria-label="Default select example" required>
-                        <option selected value="">Select</option>
-                        <?php
-                         include '../server.php';
-		                       	$sql = "SELECT fid, fname FROM fac_tb WHERE status='1'";
-		                        $result = $conn->query($sql);
-		                        while ($row=$result->fetch_assoc()){
-		                          echo "<option value='".$row['fid']."'>".$row['fname']."</option>";
-		                        }
-		                    	?>
-              </select>
-    </tr><br>
-
-  <label  class="col-sm-2 col-form-label">Room no</label>
-        <table>
-      <tr>
-      <select name="class_id" class="form-select" aria-label="Default select example" required>
-                        <option selected value="">Select </option>
-                        <?php
-                         include '../server.php';
-		                       	$sql = "SELECT class_id,room_no FROM classroom_tb";
-		                        $result = $conn->query($sql);
-		                        while ($row=$result->fetch_assoc()){
-		                          echo "<option value='".$row['class_id']."'>".$row['room_no']."</option>";
-		                        }
-		                    	?>
-              </select>
-    </tr><br>
-    <tr>
-    <div class="hstack gap-3">
-    <button type="submit" class="btn btn-outline-primary" name="reallocate">Update</button>
-  <div class="vr"></div>
-  <a class='btn btn-outline-secondary' href="fac_schedule.php">Go back</a>
-</div>
-</form>
-</tr>
-</table>
-</div>
-<?php
-include '../server.php';
-if(isset($_REQUEST['reallocate'])){
-    $al_id=$_GET['al_id'];
-    $fid=$_POST['fid'];
-    $class_id=$_POST['class_id'];
-    $realoc = "UPDATE alloc_tb SET fid='$fid',class_id='$class_id' WHERE al_id='$al_id'";
-    $result = $conn->query($realoc);
-    if($result){
-        echo "<script>alert('Updated Successfully!')</script>";
-        echo "<script>window.location.href='fac_schedule.php'</script>";
-    }
-    else{
-        echo "<script>alert('Failed to Update!')</script>";
-        echo "<script>window.location.href='fac_schedule.php'</script>";
-    }
-}
+  <div class="d-flex flex-column flex-grow-1" style="overflow: auto; padding : 10px;">
+  <?php
+  include '../server.php';
+  $fetch_exam = "SELECT * FROM exam_tb WHERE status='1'";
+  $exam = mysqli_query($conn,$fetch_exam);
+  if(mysqli_num_rows($exam) > 0){
+    while($row = mysqli_fetch_array($exam)){
+      $exam_id = $row["exam_id"];
+      $exam_title= $row["exam_name"];
 ?>
-<script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha384-GNFwBvfVxBkLMJpYMOABq3c+d3KnQxudP/mGPkzpZSTYykLBNsZEnG2D9G/X/+7D" crossorigin="anonymous" async></script>
+<div class="accordion" id="accordionExample">
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="headingOne">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+      <?php echo $exam_title; ?>
+      </button>
+    </h2>
+    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+      <div class="accordion-body">
+      <div class="card">
+      <table id="data_table" class="table table-bordered border-dark">
+		<thead>
+			<tr>
+				<th>Date</th>
+        <th>Time</th>
+				<th>Course</th>
+        <th>Subject</th>
+     </tr>
+		</thead>
+		<tbody>
+			<?php
+      include '../server.php';
+      $sql_query = "SELECT * FROM sub_tb, dep_tb, x_table_tb, exam_tb WHERE sub_tb.sub_id = x_table_tb.sub_id AND x_table_tb.exam_id = exam_tb.exam_id AND dep_tb.depid = sub_tb.depid AND exam_tb.exam_id = '$exam_id'";
+			$resultset = mysqli_query($conn, $sql_query) or die("database error:". mysqli_error($conn));
+      if($resultset->num_rows == 0){
+        echo "<tbody><tr>";
+        echo "<td colspan='5'>No Timetable Found</td>";
+        echo "</tr></tbody>";
+      }
+      else{
+			while( $row = mysqli_fetch_assoc($resultset) ) {
+			?>
+			   <tr id="<?php echo $row ['table_id']; ?>">
+         <td><?php echo $row ['x_date']; ?></td>
+			   <td><?php echo $row ['time']; ?></td>
+			   <td><?php echo $row ['dname']; ?></td>
+			   <td><?php echo $row ['sub_name']; ?></td>
+               <td><form class="form-horizontal" method="post"action=''>
+                        <input type="hidden" name="table_id" value="<?php echo $row['table_id']; ?>">
+                        <input type='submit' class='btn btn-danger' name='delete' value='Delete'>
+                        <input type='submit' class='btn btn-outline-primary' name='modify' value='Change'>
+                        </form></td>
+			   </tr>
+			<?php }
+      } ?>
+		</tbody>
+		</table>
+    </div>
+      
+    </div>
+  </div>
+  <?php
+        }
+    }
+                      
+
+    if(isset($_POST['delete'])){
+        $table_id = $_POST['table_id'];
+        $delete = "DELETE FROM x_table_tb WHERE table_id=$table_id";
+        $result = mysqli_query($conn,$delete);
+        if($result){
+            echo "<script>alert('Deleted Successfully')</script>";
+            echo "<script>window.location.href='edit_exam.php'</script>";
+        }
+        else{
+            echo "<script>alert('Failed to Delete')</script>";
+            echo "<script>window.location.href='edit_exam.php'</script>";
+        }
+    }
+
+    if(isset($_POST['modify'])){
+        $fetch = "select * from x_table_tb where table_id=table_id";
+        $table_id = mysqli_query($conn,$fetch);
+        echo "<scipt> date = window.prompt('Enter the new date', '$fetch');";
+        
+    }
+    ?>
+    
+
+    
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha384-GNFwBvfVxBkLMJpYMOABq3c+d3KnQxudP/mGPkzpZSTYykLBNsZEnG2D9G/X/+7D" crossorigin="anonymous" async></script>
 </main>
-<script src="../assets/js/bootstrap.bundle.min.js"></script>
-<script src="../assets/js/script.js"></script>
-</body>
+
+
+    <script src="../assets/js/bootstrap.bundle.min.js"></script>
+
+      <script src="../assets/js/script.js"></script>
+  </body>
 </html>

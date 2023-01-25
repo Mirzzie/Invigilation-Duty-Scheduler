@@ -1,6 +1,23 @@
 <?php
+include "../server.php";
 session_start();
 $uname = $_SESSION['uname'];
+if (empty($uname)){
+    header("location:../index.html");
+}
+if($uname){
+  
+  $fetch = "SELECT fid FROM fac_tb WHERE uname = '$uname'";
+  $fid = mysqli_query($conn, $fetch);
+  while( $record = mysqli_fetch_assoc($fid))
+  {
+  $fac_id = $record['fid'];
+  }
+  $sql_query = "SELECT * FROM alloc_tb, exam_tb, x_table_tb, fac_tb, classroom_tb 
+  WHERE fac_tb.fid=$fac_id AND alloc_tb.fid = fac_tb.fid AND exam_tb.exam_id = alloc_tb.table_id 
+  AND classroom_tb.class_id = alloc_tb.class_id AND x_table_tb.exam_id = exam_tb.exam_id";
+  $resultset = mysqli_query($conn, $sql_query) or die("database error:". mysqli_error($conn));
+}
 ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
@@ -95,80 +112,48 @@ $uname = $_SESSION['uname'];
       <span class="text">Menu</span>
     </div>
 
-<?php
-  //fetch card data
-  include "../server.php";
-  $sql = "SELECT * from fac_tb WHERE status = '1'";
-  $avail_fac_count = mysqli_query($conn,$sql);
-  
-  include "../server.php";
-  $sql = "SELECT * from exam_tb ";
-  $exam_count = mysqli_query($conn,$sql);
-
-?>
-
-  <div class="row">
-    <div class="column">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title"><b>Exams</b></h5>
-          <h6 class="card-subtitle mb-2 text-muted">Ongoing</h6>
-          <p class="card-text"><?php echo mysqli_num_rows($exam_count); ?></p>
-        </div>
-      </div>
-    </div>
-    
-    <div class="column">
-      <div class="card">
-        <div class="card-body">
-        <h5 class="card-title"><b>Faculties</b></h5>
-        <h6 class="card-subtitle mb-2 text-muted">Total</h6> 
-        <p class="card-text"><?php echo mysqli_num_rows($avail_fac_count); ?></p>
-      </div></div>
-    </div>
-  <div class="d-flex flex-column flex-grow-1" style="padding-top : 30px;">
-  
+  <div class="d-flex flex-column flex-grecord-1" style="padding-top : 30px;">
   <div class="card">
-  <h5 class="card-header">Upcoming Examinations</h5>
-    
-    <div class="table-responsive">
-      <table class="table table-bordered border-dark">
-        <thead>
-          <tr>
-            
-            <th scope="col">From</th>
-            <th scope="col">To</th>
-            <th scope="col">Name of Examination</th>
-            
-          </tr>
-        </thead>
-        <tbody>
-
-		<?php
+    <div class="card-body">
+        <h5 class="card-title">MY SCHEDULE</h5>
+      <table id="data_table" class="table table-bordered border-dark">
+		<thead>
+			<tr>
+      <th>Date</th>
+      <th>Time</th>
+      <th>Exam</th>
+      <th>Room</th>
+     </tr>
+		</thead>
+		<tbody>
+			<?php
+     
       include '../server.php';
-      $sql_query = "SELECT * FROM exam_tb WHERE status='1'";
-			$resultset = mysqli_query($conn, $sql_query) or die("database error:". mysqli_error($conn));
-			while( $row = mysqli_fetch_assoc($resultset) ) {
-			?>
-			   <tr id="<?php echo $row ['exam_id']; ?>">
-
-         <td><?php echo $row ['start_date']; ?></td>
-			   <td><?php echo $row ['end_date']; ?></td>
-			   <td><?php echo $row ['exam_name']; ?></td>
-			   </tr>
-			<?php } ?>
-          
-        </tbody>
-      </table>
+      if($resultset->num_rows == 0){
+        echo "<tbody><tr>";
+        echo "<td colspan='4'>No Scheduled Duties So Far</td>";
+        echo "</tr></tbody>";
+      }
+      else{
+        while( $record = mysqli_fetch_assoc($resultset) ) {
+			  ?>
+			    <tr id="<?php echo $record ['al_id']; ?>">
+                <td><?php echo $record ['x_date']; ?></td>
+                <td><?php echo $record ['time']; ?></td>
+                <td><?php echo $record ['exam_name']; ?></td>
+                <td><?php echo $record ['room_no']; ?></td>
+            </tr>
+            <?php } 
+      }
+      ?>
+		</tbody>
+		</table>
     </div>
+  </div>
 </div>
-</div>
-  <script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha384-GNFwBvfVxBkLMJpYMOABq3c+d3KnQxudP/mGPkzpZSTYykLBNsZEnG2D9G/X/+7D" crossorigin="anonymous" async></script>
+<script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha384-GNFwBvfVxBkLMJpYMOABq3c+d3KnQxudP/mGPkzpZSTYykLBNsZEnG2D9G/X/+7D" crossorigin="anonymous" async></script>
 </main>
-
-
-    <script src="../assets/js/bootstrap.bundle.min.js"></script>
-
-      <script src="../assets/js/script.js"></script>
-  </body>
+<script src="../assets/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/js/script.js"></script>
+</body>
 </html>
