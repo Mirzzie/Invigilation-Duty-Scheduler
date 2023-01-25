@@ -134,9 +134,9 @@ $uname = $_SESSION['uname'];
 		<tbody>
 		<?php
       include '../server.php';
-      $sql_query = "SELECT al_id,x_table_tb.x_date,x_table_tb.time, sub_tb.sub_name, alloc_tb.fid, fac_tb.fname, classroom_tb.room_no FROM alloc_tb LEFT JOIN (
-        x_table_tb LEFT JOIN sub_tb
-        ON sub_tb.sub_id = x_table_tb.sub_id)
+      $sql_query = "SELECT al_id,x_table_tb.x_date,x_table_tb.time, exam_tb.exam_name, alloc_tb.fid, fac_tb.fname, classroom_tb.room_no FROM alloc_tb LEFT JOIN (
+        x_table_tb LEFT JOIN exam_tb
+        ON exam_tb.exam_id = x_table_tb.exam_id)
         ON alloc_tb.table_id =x_table_tb.table_id
         LEFT JOIN fac_tb
         ON alloc_tb.fid = fac_tb.fid
@@ -155,7 +155,7 @@ $uname = $_SESSION['uname'];
                 <td><?php echo $row ['al_id']; ?></td>
                 <td><?php echo $row ['x_date']; ?></td>
                 <td><?php echo $row ['time']; ?></td>
-                <td><?php echo $row ['sub_name']; ?></td>
+                <td><?php echo $row ['exam_name']; ?></td>
                 <td><?php echo $row ['fname']; ?></td>
                 <td><?php echo $row ['room_no']; ?></td>
                 <td><form class="form-horizontal" method="post"action=''>

@@ -131,7 +131,7 @@ if($uname){
       include '../server.php';
       if($resultset->num_rows == 0){
         echo "<tbody><tr>";
-        echo "<td colspan='4'>No Scheduled Duties So Far</td>";
+        echo "<td colspan='4'>No scheduled duties so far !</td>";
         echo "</tr></tbody>";
       }
       else{
