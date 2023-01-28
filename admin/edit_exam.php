@@ -134,17 +134,18 @@ $uname = $_SESSION['uname'];
     </h2>
     <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
       <div class="accordion-body">
-      <div class="card">
-      <table id="data_table" class="table table-bordered border-dark">
-		<thead>
-			<tr>
+       <div class="card">
+       <table id="data_table" class="table table-bordered border-dark">
+		   <thead>
+			 <tr>
 				<th>Date</th>
         <th>Time</th>
 				<th>Course</th>
         <th>Subject</th>
-     </tr>
-		</thead>
-		<tbody>
+        <th>Modify</th>
+      </tr>
+		 </thead>
+		 <tbody>
 			<?php
       include '../server.php';
       $sql_query = "SELECT * FROM sub_tb, dep_tb, x_table_tb, exam_tb WHERE sub_tb.sub_id = x_table_tb.sub_id AND x_table_tb.exam_id = exam_tb.exam_id AND dep_tb.depid = sub_tb.depid AND exam_tb.exam_id = '$exam_id'";
@@ -162,28 +163,83 @@ $uname = $_SESSION['uname'];
 			   <td><?php echo $row ['time']; ?></td>
 			   <td><?php echo $row ['dname']; ?></td>
 			   <td><?php echo $row ['sub_name']; ?></td>
-               <td><form class="form-horizontal" method="post"action=''>
+               <td><form class="form-horizontal" method="post" action=''>
                         <input type="hidden" name="table_id" value="<?php echo $row['table_id']; ?>">
+                        <input type='submit' class='btn btn-outline-primary' name='modify' value='update'>
                         <input type='submit' class='btn btn-danger' name='delete' value='Delete'>
-                        <input type='submit' class='btn btn-outline-primary' name='modify' value='Change'>
                         </form></td>
 			   </tr>
 			<?php }
       } ?>
-		</tbody>
-		</table>
+		 </tbody>
+		 </table>
+     <?php
+     if(isset($_POST['modify'])){
+      echo "<div class='card'>";
+      echo "<h6 class='card-header'>Update Exam</h6>";
+          echo "<table id='data_table' class='table table-bordered border-dark'>";
+          echo "<form method='POST' action=''>";
+        echo "<thead>";
+          echo "<tr>";
+            echo "<th>Date</th>";
+            echo "<th>Time</th>";
+            echo "<th>Course</th>";
+            echo "<th>Subject</th>";
+         echo "</tr>";
+        echo "</thead>";
+        echo "<tbody>";
+          echo "<tr>";
+            echo"<form method='POST' action=''>";
+            echo "<td><input type='date' name='date' class='form-control' required></td>";
+            echo"<td><input type='time' name='time' class='form-control' required></td>";
+            echo "<td>";
+            echo "<select name='sub_id' class='form-select' required>";
+            echo "<option value=''>Select Course</option>";
+                  include '../server.php';
+                  $sql = "SELECT depid,dname FROM dep_tb";
+                  $result = mysqli_query($conn, $sql);
+                  while($row = mysqli_fetch_assoc($result)){
+                    echo "<option value='".$row['depid']."'>".$row['dname']."</option>";
+                  }
+                
+            echo "</td>";
+            echo "<td>";
+              echo "<select name='sub_id' class='form-select' required>";
+                echo "<option value=''>Select Subject</option>";
+               
+                  include '../server.php';
+                  $sql = "SELECT * FROM sub_tb";
+                  $result = mysqli_query($conn, $sql);
+                  while($row = mysqli_fetch_assoc($result)){
+                    echo "<option value='".$row['sub_id']."'>".$row['sub_name']."</option>";
+                  }
+           
+              echo "</select>";
+            echo "</td>";
+          echo "</tr>";
+          echo "</tbody>";
+          echo "</table>";
+          echo "<div class='card-footer'>";
+          echo "<div class='hstack gap-3'>";
+        echo "<button type='submit' class='btn btn-outline-primary' name='submit'>Update</button>";
+      echo "</div>";
+      echo "</form>";
+      echo "</div>";
+    }
+    ?>
+     </div>
+     </div>
+     </div>
     </div>
-      
-    </div>
-  </div>
-  <?php
+   <?php
         }
     }
                       
 
     if(isset($_POST['delete'])){
         $table_id = $_POST['table_id'];
-        $delete = "DELETE FROM x_table_tb WHERE table_id=$table_id";
+        echo $table_id;
+        $delete = "DELETE * FROM x_table_tb WHERE table_id=$table_id";
         $result = mysqli_query($conn,$delete);
         if($result){
             echo "<script>alert('Deleted Successfully')</script>";
@@ -193,13 +249,6 @@ $uname = $_SESSION['uname'];
             echo "<script>alert('Failed to Delete')</script>";
             echo "<script>window.location.href='edit_exam.php'</script>";
         }
-    }
-
-    if(isset($_POST['modify'])){
-        $fetch = "select * from x_table_tb where table_id=table_id";
-        $table_id = mysqli_query($conn,$fetch);
-        echo "<scipt> date = window.prompt('Enter the new date', '$fetch');";
-        
     }
     ?>
     
