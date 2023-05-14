@@ -10,7 +10,7 @@ if(isset($_SESSION['uname'])){
 
   $uname = filter_var ($_REQUEST['uname'], FILTER_SANITIZE_STRING);
   $pass = filter_var ($_REQUEST['pass']);
-  echo $uname;
+  
   // Check if it's the administrator and redirects to admin dashboard
 
   if($uname == 'admin' && $pass == 'admin'){
@@ -19,12 +19,8 @@ if(isset($_SESSION['uname'])){
   }
   // Check if user inputs are empty
 
-  if(empty($uname) || empty($pass)){
-    $error = "Username or Password is empty";
-  }
+  if(!(empty($uname)) && !(empty($pass))){
 
-  // Check if user exists in database and redirects to user dashboard
-  else{
     $sql = "SELECT * FROM fac_tb WHERE uname = '$uname' AND passw = '$pass'";
     $result = mysqli_query($conn, $sql);
     if(mysqli_num_rows($result) > 0){
@@ -32,9 +28,9 @@ if(isset($_SESSION['uname'])){
       header("location: ./user/user_dash.php?uname=$uname");
     }
     else{
-      $error = "Username or Password is incorrect";
+      echo "<script>alert('User Not Resgistered. Please Sign Up to continue');</script>";
     }
-  }
+}
 }
 ?>
 <!DOCTYPE html>
@@ -61,6 +57,8 @@ if(isset($_SESSION['uname'])){
     <div class="container">
       <div class="forms-container">
         <div class="signin-signup">
+
+        <!-- SIGN IN FORM -->
           <form action="#"  method="POST" class="sign-in-form">
             <h2 class="title">Sign in</h2>
             <div class="input-field">
@@ -73,6 +71,8 @@ if(isset($_SESSION['uname'])){
             </div>
              <input type="submit" value="Login" name="sign" class="btn solid"/>
           </form>
+
+          <!-- SIGN UP FORM -->
           <form action="#"  method="POST" class="sign-up-form">
             <h2 class="title">Sign up</h2>
             <div class="input-field">
@@ -81,7 +81,7 @@ if(isset($_SESSION['uname'])){
             </div>
             <div class="input-field">
               <i class="fas fa-envelope"></i>
-              <input type="text" name="uname" placeholder="Username" required  pattern="[a-zA-Z0-9]+([._]?[a-zA-Z0-9]+)*$"/>
+              <input type="text" name="uname" placeholder="Username" required  pattern="[a-zA-Z0-9]+([._]?[a-zA-Z0-9]+)*$+@"/>
             </div>
             <div class="input-field">
               <i class="fas fa-lock"></i>
@@ -170,7 +170,7 @@ if(isset($_REQUEST['up'])){
                 $result = mysqli_query($conn, $query);
                   if($result)
                     {
-                      echo "<script>alert('Registered !')</script>";
+                      echo "<script>alert('Successfully Registered! Login in to Continue')</script>";
                     }
                    else
                      {
