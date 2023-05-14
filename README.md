@@ -1,11 +1,10 @@
 # Invigilation-Duty-Scheduler
 
+A web portal for college faculties/invigilators to manage exam duties and to schedule themselves into specific exam halls.
 
 <div align="center">
   <img src="assets/images/landing.png">
 </div>
-
-A web portal for college faculties/invigilators to manage exam duties and to schedule themselves into specific exam halls.
 
 ## Features
 - Modern and personalised UI.
