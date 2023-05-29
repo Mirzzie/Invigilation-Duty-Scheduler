@@ -10,14 +10,12 @@ services:
     volumes:
       - "./db:/docker-entrypoint-initdb.d" # this is how we persist a sql db even when container stops
   www:
-    image: php:apache
+    image: php:latest
     ports:
       - "80:80"
       - 443:443
     volumes:
       - "./:/var/www/html" #syncs the current directory to the container
-    links:
-      - php
   phpmyadmin:
      image: phpmyadmin/phpmyadmin
      ports:
