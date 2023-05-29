@@ -1,0 +1,9 @@
+version: '3.1'
+services:
+  www:
+    image: php:apache
+    volumes:
+      - "./:/var/www/html" # mount current directory to /var/www/html
+    ports:
+      - "8080:80" # expose port 8080 on host
+      - 443:443 # expose port 443 on host
