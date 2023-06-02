@@ -8,7 +8,7 @@ if(isset($_SESSION['uname'])){
 }
   // assign user input to variables - $uname and $pass
 
-  $uname = filter_var ($_REQUEST['uname'], FILTER_SANITIZE_STRING);
+  $uname = filter_var ($_REQUEST['uname']);
   $pass = filter_var ($_REQUEST['pass']);
   
   // Check if it's the administrator and redirects to admin dashboard
