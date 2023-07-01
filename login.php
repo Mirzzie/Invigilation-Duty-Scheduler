@@ -10,7 +10,7 @@ if(isset($_SESSION['uname'])){
 
   $uname = filter_var ($_REQUEST['uname']);
   $pass = filter_var ($_REQUEST['pass']);
-  
+
   // Check if it's the administrator and redirects to admin dashboard
 
   if($uname == 'admin' && $pass == 'admin'){
